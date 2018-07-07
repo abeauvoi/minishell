@@ -7,13 +7,18 @@
 int		main(int argc, char **argv, char **env)
 {
 	t_minishell *data;
+	int			i;
 
+	i = 0;
 	argc = 1;
 	argv = NULL;
 	if (!(data = malloc(sizeof(t_minishell))))
 		return (-1);
 	get_env(env, data);
-	ft_putstr(data->pwd);
+	while (42)
+	{
+		process(data);
+	}
 	return (0);
 }
 

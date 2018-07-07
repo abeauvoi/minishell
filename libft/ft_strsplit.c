@@ -3,78 +3,60 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolabour <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/14 02:32:26 by jolabour          #+#    #+#             */
-/*   Updated: 2017/11/20 07:40:07 by jolabour         ###   ########.fr       */
+/*   Created: 2017/04/17 15:46:59 by abeauvoi          #+#    #+#             */
+/*   Updated: 2017/04/21 19:56:29 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
-static int	ft_count_world(char const *s, char c)
+static size_t	ft_word_len(const char *s, char c)
 {
-	int		i;
-	int		word;
-	int		is_word;
+	size_t		i;
 
 	i = 0;
-	is_word = 0;
-	word = 0;
-	while (s[i])
-	{
-		if (is_word == 1 && s[i] == c)
-			is_word = 0;
-		if (is_word == 0 && s[i] != c)
-		{
-			word++;
-			is_word = 1;
-		}
-		i++;
-	}
-	return (word);
+	while (s[i] && s[i] != c)
+		++i;
+	return (i);
 }
 
-static int	size_word(char const *s, char c)
+static	size_t	ft_word_count(const char *s, char c)
 {
-	int		size_word;
-	int		i;
+	size_t		words;
 
-	i = 0;
-	size_word = 0;
-	while (s[i] != c && s[i])
+	words = 0;
+	while (*s)
 	{
-		i++;
-		size_word++;
+		if (*s != c && (*(s + 1) == c || *(s + 1) == 0))
+			++words;
+		++s;
 	}
-	return (size_word);
+	return (words);
 }
 
-char		**ft_strsplit(char const *s, char c)
+char			**ft_strsplit(char const *s, char c)
 {
-	char	**tab;
-	int		i;
-	int		j;
+	char		**split;
+	size_t		i;
+	size_t		j;
+	size_t		words;
 
-	if (!s)
+	if (!s || !(split = (char **)malloc(sizeof(*split)
+					* ((words = ft_word_count(s, c)) + 1))))
 		return (NULL);
+	split[words] = NULL;
 	i = 0;
-	if (ft_strlen(s) == 0)
-		return (ft_memalloc(0));
-	if (!(tab = (char **)malloc(sizeof(char *) * (ft_count_world(s, c) + 1))))
-		return (NULL);
 	j = 0;
-	while (s[i] && s[i] == c)
-		i++;
-	while (j < ft_count_world(s, c) && s[i])
+	while (j < words)
 	{
-		while (s[i] == c)
-			i++;
-		tab[j] = ft_strsub(s, i, size_word(s + i, c));
-		while (s[i] != c)
-			i++;
-		j++;
+		while (s[i] && s[i] == c)
+			++i;
+		split[j++] = ft_strsub(s, i, ft_word_len(s + i, c));
+		while (s[i] && s[i] != c)
+			++i;
 	}
-	tab[j] = 0;
-	return (tab);
+	return (split);
 }

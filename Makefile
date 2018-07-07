@@ -26,7 +26,7 @@ VPATH		= $(SRCS_DIR)
 # Sources
 #
 
-SRCS		= main.c struct.c path.c
+SRCS		= main.c struct.c path.c get_next_line.c utils.c core.c
 
 #
 # Build

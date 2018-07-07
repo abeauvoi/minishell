@@ -49,7 +49,11 @@ void	get_env(char **env, t_minishell *data)
 {
 	char **tmp;
 
+	int i;
+
+	i = 0;
 	tab_path(env, data);
 	tmp = ft_strsplit(get_pwd(env), '=');
 	data->pwd = ft_strdup(tmp[1]);
+	get_dir(data);
 }
