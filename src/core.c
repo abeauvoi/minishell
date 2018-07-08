@@ -1,4 +1,5 @@
 #include "minishell.h"
+#include <stdio.h>
 
 void	print_prompt(t_minishell *data)
 {
@@ -23,6 +24,7 @@ void	get_fork(t_minishell *data)
 	if (father == 0)
 	{
 		execve(data->valide_path, data->arg, data->copy_env);
+		exit(0);
 	}
 }
 
@@ -33,6 +35,9 @@ void	process(t_minishell *data)
 	print_prompt(data);
 	while (get_next_line(1, &line) != 2);
 	data->arg = ft_strsplit(line, ' ');
+	if (data->arg[0] != NULL)
+		if (ft_strncmp(data->arg[0], "exit", 4) == 0)
+			exit(EXIT_SUCCESS);
 	data->valide_path = check_path(data);
 	get_fork(data);
 }
