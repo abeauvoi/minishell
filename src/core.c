@@ -19,9 +19,11 @@ void	get_fork(t_minishell *data)
 
 	father = fork();
 	if (father > 0)
-		wait();
+		wait(0);
 	if (father == 0)
-
+	{
+		execve(data->valide_path, data->arg, data->copy_env);
+	}
 }
 
 void	process(t_minishell *data)
@@ -31,4 +33,6 @@ void	process(t_minishell *data)
 	print_prompt(data);
 	while (get_next_line(1, &line) != 2);
 	data->arg = ft_strsplit(line, ' ');
+	data->valide_path = check_path(data);
+	get_fork(data);
 }

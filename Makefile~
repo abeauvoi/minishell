@@ -6,7 +6,7 @@
 #    By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/17 15:44:28 by abeauvoi          #+#    #+#              #
-#    Updated: 2018/07/08 05:51:35 by jolabour         ###   ########.fr        #
+#    Updated: 2018/05/03 01:28:28 by abeauvoi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ CFLAGS		= -Wall -Werror -Wextra $(addprefix -I, $(INC_DIRS))
 LFLAGS		= -L$(LIB_DIR) -lft
 LIB		= libft.a
 COMP		= $(CC) $(CFLAGS) -o $@ -c $<
-LINK		= $(CC) $(CFLAGS) $(LFLAGS) -o $@ $(filter-out $(LIB_DIR)/$(LIB), $^)
+LINK		= $(CC) $(LFLAGS) -o $@ $(filter-out $(LIB_DIR)/$(LIB), $^)
 
 #
 # Rules
