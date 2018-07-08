@@ -14,18 +14,7 @@ char	*str_path(char **env)
 		}
 		env++;
 	}
-	return (path);
-}
-
-void	tab_path(char **env, t_minishell *data)
-{
-	char *tmp;
-
-	tmp = ft_strnew(1);
-	data->path = ft_strsplit(str_path(env), '=');
-	ft_strcpy(tmp, data->path[1]);
-	data->path = ft_strsplit(tmp, ':');
-	ft_strdel(&tmp);
+	return (path ? path + 5 : path);
 }
 
 char	*get_pwd(char **env)
@@ -42,18 +31,19 @@ char	*get_pwd(char **env)
 		}
 		env++;
 	}
-	return (pwd);
+	return (pwd ? pwd + 4 : pwd);
 }
 
 void	get_env(char **env, t_minishell *data)
 {
-	char **tmp;
+	char *path;
+	char *pwd;
 
-	int i;
-
-	i = 0;
-	tab_path(env, data);
-	tmp = ft_strsplit(get_pwd(env), '=');
-	data->pwd = ft_strdup(tmp[1]);
+	pwd = get_pwd(env);
+	path = str_path(env);
+	if (path)
+		data->bin_dirs = ft_strsplit(path, ':');
+	if (pwd)
+		data->pwd = ft_strdup(pwd);
 	get_dir(data);
 }

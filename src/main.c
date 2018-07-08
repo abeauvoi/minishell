@@ -6,18 +6,15 @@
 
 int		main(int argc, char **argv, char **env)
 {
-	t_minishell *data;
-	int			i;
+	t_minishell data;
 
-	i = 0;
 	argc = 1;
 	argv = NULL;
-	if (!(data = malloc(sizeof(t_minishell))))
-		return (-1);
-	get_env(env, data);
+	get_env(env, &data);
+	data.copy_env = env;
 	while (42)
 	{
-		process(data);
+		process(&data);
 	}
 	return (0);
 }

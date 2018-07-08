@@ -11,12 +11,16 @@
 
 typedef struct	s_minishell
 {
-	char **path;
-	char *pwd;
-	char *dir;
-	char **arg;
+	char	**bin_dirs;
+	char	*pwd;
+	char	*dir;
+	char	**arg;
+	char	*valide_path;
+	char	**copy_env;
 }				t_minishell;
 
+void			get_fork(t_minishell *data);
+char			*check_path(t_minishell *data);
 void			get_env(char **env, t_minishell *data);
 void			tab_path(char **env, t_minishell *data);
 t_minishell		*init_struct(t_minishell *data);
