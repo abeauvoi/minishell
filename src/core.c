@@ -1,7 +1,7 @@
 #include "minishell.h"
 #include <stdio.h>
 
-static void	free_arg(char **arg)
+void	free_arg(char **arg)
 {
 	int		i;
 
@@ -11,6 +11,7 @@ static void	free_arg(char **arg)
 		ft_strdel(&arg[i]);
 		i++;
 	}
+	free(arg);
 }
 
 void	print_prompt(t_minishell *data)
@@ -30,6 +31,7 @@ void	get_fork(t_minishell *data)
 {
 	pid_t	father;
 
+	(void)data;
 	father = fork();
 	if (father > 0)
 		wait(0);
@@ -49,6 +51,7 @@ void	process(t_minishell *data, t_env **list)
 	print_prompt(data);
 	while (get_next_line(1, &line) != 2);
 	data->arg = ft_strsplit(line, ' ');
+	ft_strdel(&line);
 	data->valide_path = check_path(data);
 	if (!data->arg[0])
 		return ;
@@ -57,4 +60,5 @@ void	process(t_minishell *data, t_env **list)
 	else
 		exec_builtin(data, i, list);
 	free_arg(data->arg);
+	ft_strdel(&data->valide_path);
 }

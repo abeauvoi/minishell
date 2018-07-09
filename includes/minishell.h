@@ -26,6 +26,7 @@ typedef struct	s_minishell
 	char	**copy_env;
 }				t_minishell;
 
+void			free_arg(char **arg);
 t_env			*create_node(char *str);
 void			lst_push(t_env **head, t_env *new);
 t_env			*set_list(t_minishell *data);
