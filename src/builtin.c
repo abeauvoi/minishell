@@ -6,13 +6,13 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/08 05:13:12 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/07/08 06:22:05 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/07/09 04:34:45 by jolabour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
+#include "minishell.h"
 
-void		builtin_echo(const char **args, size_t total_length)
+void		builtin_echo(char **args, size_t total_length)
 {
 	char	*output;
 	char	*tmp;
@@ -20,7 +20,7 @@ void		builtin_echo(const char **args, size_t total_length)
 	if (!(output = ft_strnew(total_length)))
 		;
 	tmp = output;
-	while (args)
+	while (*args)
 	{
 		ft_strcpy(tmp, *args);
 		tmp += ft_strlen(*args);
@@ -28,35 +28,56 @@ void		builtin_echo(const char **args, size_t total_length)
 		if (args)
 			*tmp++ = ' ';
 	}
-	write(stdout, output, total_length);
+	ft_putendl(output);
+	ft_strdel(&output);
 }
 
-void		builtin_cd(const char **args)
+/*void		builtin_cd(const char **args)
 {
 }
-
-void		builtin_env(t_list *env)
+*/
+void		builtin_env(t_env *env)
 {
 	while (env)
 	{
-		ft_putstr(env->str);
+		ft_putendl(env->str);
 		env = env->next;
 	}
 }
 
-void		builtin_setenv(t_list **env, const char *name, const char *new,
-		size_t new_len)
+void		builtin_setenv(t_env **env, char *name, char *content)
 {
-	while ((*env)->next)
+	char	*tmp2;
+	int		len;
+	char	*tmp;
+	t_env	*new;
+	t_env	*ptr;
+
+	len = ft_strlen(name);
+	if (content)
 	{
-		if (!ft_strncmp(env->str, name, ft_strlen(name)))
-		{
-			free((*env)->str);
-			(*env)->str = new;
-			(*env)->len = new_len;
-		}
-		*env = (*env)->next;
+		tmp2 = ft_strjoin(name, "=");
+		tmp = ft_strjoin(tmp2, content);
+		ft_strdel(&tmp2);
 	}
+	else
+		tmp = ft_strjoin(name, "=");
+	ptr = *env;
+	while (ptr->next)
+	{
+		if (!ft_strncmp(ptr->str, name, len))
+		{
+			free(ptr->str);
+			ptr->str = ft_strdup(tmp);
+			free(tmp);
+			return ;
+		}
+		ptr = ptr->next;
+	}
+	new = create_node(tmp);
+	lst_push(env, new);
+	ft_strdel(&tmp);
 }
 
-void		builtin_unsetenv()
+//void		builtin_unsetenv()
+

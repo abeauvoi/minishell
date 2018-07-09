@@ -6,7 +6,7 @@
 #    By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/17 15:44:28 by abeauvoi          #+#    #+#              #
-#    Updated: 2018/07/08 05:51:35 by jolabour         ###   ########.fr        #
+#    Updated: 2018/07/09 03:17:26 by jolabour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,14 +26,14 @@ VPATH		= $(SRCS_DIR)
 # Sources
 #
 
-SRCS		= main.c struct.c path.c get_next_line.c utils.c core.c
+SRCS		= main.c struct.c path.c get_next_line.c utils.c core.c exec_builtin.c builtin.c
 
 #
 # Build
 #
 
 OBJS		= $(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))
-CFLAGS		= -Wall -Werror -Wextra $(addprefix -I, $(INC_DIRS))
+CFLAGS		= -Wall -Werror -Wextra $(addprefix -I, $(INC_DIRS)) -g3
 LFLAGS		= -L$(LIB_DIR) -lft
 LIB		= libft.a
 COMP		= $(CC) $(CFLAGS) -o $@ -c $<
