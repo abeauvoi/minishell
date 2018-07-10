@@ -14,7 +14,7 @@ void	free_arg(char **arg)
 	free(arg);
 }
 
-void	print_prompt(t_minishell *data)
+static void	print_prompt(t_minishell *data)
 {
 	ft_putstr("\x1B[1;33m");
 	ft_putstr("| ");
@@ -38,6 +38,7 @@ void	get_fork(t_minishell *data)
 	if (father == 0)
 	{
 		execve(data->valide_path, data->arg, data->copy_env);
+		ft_strdel(&data->valide_path);
 		exit(0);
 	}
 }
@@ -52,13 +53,18 @@ void	process(t_minishell *data, t_env **list)
 	while (get_next_line(1, &line) != 2);
 	data->arg = ft_strsplit(line, ' ');
 	ft_strdel(&line);
-	data->valide_path = check_path(data);
 	if (!data->arg[0])
 		return ;
-	if ((i = check_builtin(data)) == -1)
-		get_fork(data);
-	else
+	if ((i = check_builtin(data)) >= 0)
 		exec_builtin(data, i, list);
-	free_arg(data->arg);
-	ft_strdel(&data->valide_path);
+	else
+	{
+		if ((data->valide_path = check_access(data)) == NULL)
+		{
+			ft_putstr("minishell: command not found: ");
+			ft_putendl(data->arg[0]);
+			return ;
+		}
+		get_fork(data);
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/08 05:13:12 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/07/09 04:34:45 by jolabour         ###   ########.fr       */
+/*   Updated: 2018/07/10 02:06:34 by jolabour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,18 @@ void		builtin_env(t_env *env)
 	{
 		ft_putendl(env->str);
 		env = env->next;
+	}
+}
+
+void		builtin_env_test(char **env)
+{
+	int		i;
+
+	i = 0;
+	while (env[i])
+	{
+		ft_putendl(env[i]);
+		i++;
 	}
 }
 

@@ -11,9 +11,7 @@ int		main(int argc, char **argv, char **env)
 
 	argc = 1;
 	argv = NULL;
-	get_env(env, &data);
-	data.copy_env = env;
-	list = set_list(&data);
+	list = set_list(env);
 	init_builtin_tab(&data);
 	ft_putstr_fd("\033[H\033[2J", 1);
 	if (!(env[0]))
@@ -23,7 +21,13 @@ int		main(int argc, char **argv, char **env)
 	}
 	while (42)
 	{
+		get_env(&data, list);
 		process(&data, &list);
+		free_arg(data.copy_env);
+		ft_strdel(&data.pwd);
+		free_arg(data.bin_dirs);
+		ft_strdel(&data.dir);
+		free_arg(data.arg);
 	}
 	return (0);
 }

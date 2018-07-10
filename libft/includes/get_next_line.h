@@ -1,21 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdel.c                                        :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jolabour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/12 07:48:50 by jolabour          #+#    #+#             */
-/*   Updated: 2018/07/10 03:10:37 by jolabour         ###   ########.fr       */
+/*   Created: 2017/12/04 04:08:14 by jolabour          #+#    #+#             */
+/*   Updated: 2018/07/10 00:12:34 by jolabour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-void	ft_strdel(char **as)
+# include "libft.h"
+# include <fcntl.h>
+# define BUFF_SIZE 8
+
+typedef struct		s_gnl
 {
-	if (!as || !*as)
-		return ;
-	free(*as);
-	*as = NULL;
-}
+	char			*str;
+	int				fd;
+	struct s_gnl	*next;
+}					t_gnl;
+
+int					get_next_line(const int fd, char **line);
+
+#endif

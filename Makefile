@@ -6,7 +6,7 @@
 #    By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/17 15:44:28 by abeauvoi          #+#    #+#              #
-#    Updated: 2018/07/09 05:20:40 by jolabour         ###   ########.fr        #
+#    Updated: 2018/07/10 02:26:41 by jolabour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ VPATH		= $(SRCS_DIR)
 # Sources
 #
 
-SRCS		= main.c struct.c path.c get_next_line.c utils.c core.c exec_builtin.c builtin.c
+SRCS		= main.c env.c list.c check_command.c core.c exec_builtin.c builtin.c
 
 #
 # Build

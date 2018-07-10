@@ -6,7 +6,7 @@
 /*   By: jolabour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/08 23:26:13 by jolabour          #+#    #+#             */
-/*   Updated: 2018/07/09 05:18:20 by jolabour         ###   ########.fr       */
+/*   Updated: 2018/07/10 03:27:17 by jolabour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	exec_builtin(t_minishell *data, int i, t_env **list)
 		if (data->arg[1])
 			builtin_setenv(list, data->arg[1], data->arg[2]);
 		else
-			builtin_env(*list);;
+			builtin_env(*list);
 	}
 	else if (i == 5)
 		exit(EXIT_SUCCESS);
