@@ -72,5 +72,6 @@ void			builtin_env_test(char **env);
 void			builtin_setenv(t_env **env, char *name, char *content);
 void			builtin_echo(char **args, size_t total_length);
 void			builtin_env(t_env *env);
+t_env			**builtin_unsetenv(t_env **env, char *arg);
 
 #endif

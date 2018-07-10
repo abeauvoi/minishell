@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/08 05:13:12 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/07/10 02:06:34 by jolabour         ###   ########.fr       */
+/*   Updated: 2018/07/10 05:27:51 by jolabour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,18 +45,6 @@ void		builtin_env(t_env *env)
 	}
 }
 
-void		builtin_env_test(char **env)
-{
-	int		i;
-
-	i = 0;
-	while (env[i])
-	{
-		ft_putendl(env[i]);
-		i++;
-	}
-}
-
 void		builtin_setenv(t_env **env, char *name, char *content)
 {
 	char	*tmp2;
@@ -91,5 +79,25 @@ void		builtin_setenv(t_env **env, char *name, char *content)
 	ft_strdel(&tmp);
 }
 
-//void		builtin_unsetenv()
+t_env		**builtin_unsetenv(t_env **env, char *arg)
+{
+	t_env	**tmp;
+	t_env	**prev;
 
+	tmp = env;
+	prev = tmp;
+	while ((*tmp))
+	{
+		if (!ft_strncmp((*tmp)->str, arg, ft_strlen(arg)))
+		{
+			(*prev)->next = (*tmp)->next;
+			ft_strdel(&(*tmp)->str);
+			(*tmp)->next = NULL;
+			free(tmp);
+			break ;
+		}
+		prev = tmp;
+		(*tmp)= (*tmp)->next;
+	}
+	return (env);
+}
