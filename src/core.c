@@ -11,7 +11,8 @@ void	free_arg(char **arg)
 		ft_strdel(&arg[i]);
 		i++;
 	}
-	free(arg);
+	free(*arg);
+	*arg = NULL;
 }
 
 static void	print_prompt(t_minishell *data)
@@ -53,6 +54,11 @@ void	process(t_minishell *data, t_env **list)
 	while (get_next_line(1, &line) != 2);
 	data->arg = ft_strsplit(line, ' ');
 	ft_strdel(&line);
+	if (get_expansions(data->arg, data->copy_env) == 0)
+	{
+		ft_putendl("please, set the variable HOME for use ~");
+		return ;
+	}
 	if (!data->arg[0])
 		return ;
 	if ((i = check_builtin(data)) >= 0)

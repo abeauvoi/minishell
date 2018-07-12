@@ -1,5 +1,17 @@
 #include "minishell.h"
 
+void	init_builtin_tab(t_minishell *data)
+{
+	if (!(data->builtin = malloc(sizeof(char *) * 7)))
+		return ;
+	data->builtin[0] = "echo";
+	data->builtin[1] = "cd";
+	data->builtin[2] = "env";
+	data->builtin[3] = "unsetenv";
+	data->builtin[4] = "setenv";
+	data->builtin[5] = "exit";
+}
+
 void	get_dir(t_minishell *data)
 {
 	char	**tmp;
@@ -62,5 +74,5 @@ void	get_env(t_minishell *data, t_env *list)
 	if (pwd)
 		data->pwd = ft_strdup(pwd);
 	get_dir(data);
-	list_to_tab(list, &data);
+	list_to_tab(list, data);
 }

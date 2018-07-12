@@ -1,17 +1,5 @@
 #include "minishell.h"
 
-void	init_builtin_tab(t_minishell *data)
-{
-	if (!(data->builtin = malloc(sizeof(char *) * 7)))
-		return ;
-	data->builtin[0] = "echo";
-	data->builtin[1] = "cd";
-	data->builtin[2] = "env";
-	data->builtin[3] = "unsetenv";
-	data->builtin[4] = "setenv";
-	data->builtin[5] = "exit";
-}
-
 int		check_builtin(t_minishell *data)
 {
 	int		i;

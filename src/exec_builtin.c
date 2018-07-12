@@ -6,7 +6,7 @@
 /*   By: jolabour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/08 23:26:13 by jolabour          #+#    #+#             */
-/*   Updated: 2018/07/10 05:19:07 by jolabour         ###   ########.fr       */
+/*   Updated: 2018/07/12 04:13:11 by jolabour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	exec_builtin(t_minishell *data, int i, t_env **list)
 		j = 1;
 		while (data->arg[j])
 		{
-			list = builtin_unsetenv(list, data->arg[j]);
+			builtin_unsetenv(list, data->arg[j], ft_strlen(data->arg[j]));
 			j++;
 		}
 	}

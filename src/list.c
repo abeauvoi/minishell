@@ -6,7 +6,7 @@
 /*   By: jolabour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/09 23:55:31 by jolabour          #+#    #+#             */
-/*   Updated: 2018/07/10 04:47:47 by jolabour         ###   ########.fr       */
+/*   Updated: 2018/07/12 04:45:59 by jolabour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,21 @@ int		len_list(t_env *env)
 	return (i);
 }
 
-void	list_to_tab(t_env *env, t_minishell **data)
+void	list_to_tab(t_env *env, t_minishell *data)
 {
 	int		i;
 
-	if (!((*data)->copy_env = malloc(sizeof(char *) * (len_list(env) + 1))))
+	if (!(data->copy_env = (char **)malloc(sizeof(void *)
+					* (len_list(env) + 1))))
 		return ;
 	i = 0;
 	while (env)
 	{
-		(*data)->copy_env[i] = ft_strdup(env->str);
+		data->copy_env[i] = ft_strdup(env->str);
 		env = env->next;
 		i++;
 	}
-	(*data)->copy_env[i] = NULL;
+	data->copy_env[i] = NULL;
 }
 
 t_env	*create_node(char *str)

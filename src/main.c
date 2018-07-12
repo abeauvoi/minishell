@@ -6,11 +6,11 @@
 
 int		main(int argc, char **argv, char **env)
 {
-	t_minishell data;
-	t_env		*list;
+	t_minishell		data;
+	t_env			*list;
 
 	argc = 1;
-	argv = NULL;
+	(void)argv;
 	list = set_list(env);
 	init_builtin_tab(&data);
 	ft_putstr_fd("\033[H\033[2J", 1);
@@ -19,6 +19,8 @@ int		main(int argc, char **argv, char **env)
 		ft_putendl_fd("error : env is missing", 2);
 		exit(EXIT_FAILURE);
 	}
+	//init(&g_mini.copy_term);
+	//sigtest();
 	while (42)
 	{
 		get_env(&data, list);

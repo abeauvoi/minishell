@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/08 05:13:12 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/07/10 05:27:51 by jolabour         ###   ########.fr       */
+/*   Updated: 2018/07/12 04:52:04 by jolabour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,25 +79,21 @@ void		builtin_setenv(t_env **env, char *name, char *content)
 	ft_strdel(&tmp);
 }
 
-t_env		**builtin_unsetenv(t_env **env, char *arg)
+void		builtin_unsetenv(t_env **env, char *arg, size_t len)
 {
-	t_env	**tmp;
-	t_env	**prev;
+	t_env	*tmp;
+	t_env	*prev;
 
-	tmp = env;
+	tmp = *env;
 	prev = tmp;
-	while ((*tmp))
+	while (tmp)
 	{
-		if (!ft_strncmp((*tmp)->str, arg, ft_strlen(arg)))
+		if (!ft_strncmp(tmp->str, arg, len))
 		{
-			(*prev)->next = (*tmp)->next;
-			ft_strdel(&(*tmp)->str);
-			(*tmp)->next = NULL;
-			free(tmp);
-			break ;
+			lst_del(env, tmp, prev);
+			return ;
 		}
 		prev = tmp;
-		(*tmp)= (*tmp)->next;
+		tmp = tmp->next;
 	}
-	return (env);
 }
