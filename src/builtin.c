@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/08 05:13:12 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/07/12 04:52:04 by jolabour         ###   ########.fr       */
+/*   Updated: 2018/07/13 01:21:45 by jolabour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,22 @@ void		builtin_env(t_env *env)
 	}
 }
 
+int			check_name(char *name)
+{
+	int		i;
+
+	i = 1;
+	if ((name[0] < 'A' || name[0] > 'Z') && (name[0] < 'a' || name[0] > 'z'))
+		return (0);
+	while (name[i])
+	{
+		if ((name[i] < 'A' || name[i] > 'Z') && (name[i] < 'a' || name[i] > 'z') && (name[i] < '0' || name[i] > '9') && !(name[i] == '_'))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 void		builtin_setenv(t_env **env, char *name, char *content)
 {
 	char	*tmp2;
@@ -53,6 +69,11 @@ void		builtin_setenv(t_env **env, char *name, char *content)
 	t_env	*new;
 	t_env	*ptr;
 
+	if (!check_name(name))
+	{
+		ft_putendl("setenv: Variable name must contain alphanumeric characters and must begin with a letter.");
+		return ;
+	}
 	len = ft_strlen(name);
 	if (content)
 	{

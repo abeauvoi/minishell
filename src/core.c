@@ -11,8 +11,7 @@ void	free_arg(char **arg)
 		ft_strdel(&arg[i]);
 		i++;
 	}
-	free(*arg);
-	*arg = NULL;
+	free(arg);
 }
 
 static void	print_prompt(t_minishell *data)

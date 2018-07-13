@@ -10,7 +10,7 @@ int		main(int argc, char **argv, char **env)
 	t_env			*list;
 
 	argc = 1;
-	(void)argv;
+	argv = NULL;;
 	list = set_list(env);
 	init_builtin_tab(&data);
 	ft_putstr_fd("\033[H\033[2J", 1);

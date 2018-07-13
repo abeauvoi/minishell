@@ -6,7 +6,7 @@
 /*   By: jolabour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/09 23:55:31 by jolabour          #+#    #+#             */
-/*   Updated: 2018/07/12 04:45:59 by jolabour         ###   ########.fr       */
+/*   Updated: 2018/07/13 00:54:18 by jolabour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,7 @@ void	list_to_tab(t_env *env, t_minishell *data)
 {
 	int		i;
 
-	if (!(data->copy_env = (char **)malloc(sizeof(void *)
-					* (len_list(env) + 1))))
+	if (!(data->copy_env = malloc(sizeof(char *) * (len_list(env) + 1))))
 		return ;
 	i = 0;
 	while (env)
