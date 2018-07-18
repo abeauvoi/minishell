@@ -1,3 +1,4 @@
 ./obj
 minishell
 minishell.dSYM
+./libft/*.o
