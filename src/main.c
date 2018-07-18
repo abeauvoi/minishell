@@ -23,7 +23,7 @@ int		main(int argc, char **argv, char **env)
 	//sigtest();
 	while (42)
 	{
-		get_env(&data, list);
+		init_env(&data, list);
 		process(&data, &list);
 		free_arg(&data.copy_env);
 		ft_strdel(&data.pwd);

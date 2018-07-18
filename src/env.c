@@ -28,7 +28,7 @@ void	get_dir(t_minishell *data)
 	free(tmp);
 }
 
-char	*getenv(t_env *list, char *name, size_t len)
+char	*getenv(t_env *list, const char *name, size_t len)
 {
 	char	*str;
 
@@ -45,7 +45,7 @@ char	*getenv(t_env *list, char *name, size_t len)
 	return (str ? str + len : str);
 }
 
-void	get_env(t_minishell *data, t_env *list)
+void	init_env(t_minishell *data, t_env *list)
 {
 	char *path;
 	char *pwd;
