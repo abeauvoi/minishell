@@ -21,15 +21,18 @@ char	*check_access(t_minishell *data)
 	char	*tmp2;
 
 	i = 0;
-	while (data->bin_dirs[i])
+	if (data->bin_dirs)
 	{
-		tmp = ft_strjoin(data->bin_dirs[i], "/");
-		tmp2 = ft_strjoin(tmp, data->arg[0]);
-		ft_strdel(&tmp);
-		if (access(tmp2, F_OK) == 0)
-			return (tmp2);
-		ft_strdel(&tmp2);
-		i++;
+		while (data->bin_dirs[i])
+		{
+			tmp = ft_strjoin(data->bin_dirs[i], "/");
+			tmp2 = ft_strjoin(tmp, data->arg[0]);
+			ft_strdel(&tmp);
+			if (access(tmp2, F_OK) == 0)
+				return (tmp2);
+			ft_strdel(&tmp2);
+			i++;
+		}
 	}
 	return (NULL);
 }

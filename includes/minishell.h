@@ -12,6 +12,8 @@
 # include <sys/ioctl.h>
 # include <termios.h>
 # include <term.h>
+# include <pwd.h>
+# include <sys/type.h>
 
 # define BUILTIN_CD_USAGE "cd: usage: cd [-L|-P] [dir]"
 
@@ -51,7 +53,7 @@ void		sigtest(void);
 ** core
 */
 
-void			free_arg(char **arg);
+void			free_arg(char ***arg);
 void			get_fork(t_minishell *data);
 void			process(t_minishell *data, t_env **list);
 
