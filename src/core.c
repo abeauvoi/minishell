@@ -54,10 +54,7 @@ void	process(t_minishell *data, t_env **list)
 	data->arg = ft_strsplit(line, ' ');
 	ft_strdel(&line);
 	if (get_expansions(data->arg, data->copy_env) == 0)
-	{
-		ft_putendl("please, set the variable HOME to use ~");
 		return ;
-	}
 	if (!data->arg[0])
 		return ;
 	if ((i = check_builtin(data)) >= 0)

@@ -6,7 +6,7 @@
 /*   By: jolabour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/18 06:44:24 by jolabour          #+#    #+#             */
-/*   Updated: 2018/07/18 06:44:29 by jolabour         ###   ########.fr       */
+/*   Updated: 2018/07/18 07:02:45 by jolabour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,12 @@ void		builtin_setenv(t_env **env, char *name, char *content)
 	t_env	*new;
 	t_env	*ptr;
 
-	/*if (!check_name(name))
+	if (!check_name(name))
 	{
-		ft_putendl("setenv: Variable name must contain alphanumeric characters \
-				and must begin with a letter.");
+		ft_putendl("setenv: Variable name must contain alphanumeric characters "
+				"and must begin with a letter.");
 		return ;
-	}*/
+	}
 	len = ft_strlen(name);
 	if (content)
 	{
@@ -82,7 +82,7 @@ void		builtin_setenv(t_env **env, char *name, char *content)
 	else
 		tmp = ft_strjoin(name, "=");
 	ptr = *env;
-	while (ptr->next)
+	while (ptr)
 	{
 		if (!ft_strncmp(ptr->str, name, len))
 		{

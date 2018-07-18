@@ -6,7 +6,7 @@
 /*   By: jolabour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/12 01:23:26 by jolabour          #+#    #+#             */
-/*   Updated: 2018/07/18 06:38:05 by jolabour         ###   ########.fr       */
+/*   Updated: 2018/07/18 06:56:05 by jolabour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,22 +52,25 @@ int		get_expansions(char **arg, char **env)
 	int		i;
 
 	i = 1;
-	if (!ft_strncmp(arg[0], "setenv", 6) || !ft_strncmp(arg[0], "unsetenv", 8))
+	if ((!ft_strncmp(arg[0], "setenv", 6)) || (!ft_strncmp(arg[0], "unsetenv", 8)))
 		return (1);
 	while (arg[i])
 	{
 		if (arg[i][0] == '~')
 		{
-			if (arg[i][1] == '/')
+			if (arg[i][1] == '/' || ft_strlen(arg[i]) == 1)
 			{
 				if ((arg[i] = get_tilde(arg[i], env)) == NULL)
+				{
+					ft_putendl("please, set the variable HOME to use ~");
 					return (0);
+				}
 			}
 			else
 			{
 				if (getpwnam(arg[i] + 1) == NULL)
 				{
-					ft_putendl("Unknown user: ");
+					ft_putstr("Unknown user: ");
 					ft_putendl(arg[i] + 1);
 					return (0);
 				}
