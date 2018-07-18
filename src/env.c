@@ -28,7 +28,6 @@ void	get_dir(t_minishell *data)
 	free(tmp);
 }
 
-
 char	*_getenv(t_env *list, const char *name, size_t len)
 {
 	char	*str;

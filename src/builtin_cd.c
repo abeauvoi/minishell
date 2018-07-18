@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/18 00:37:39 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/07/18 06:34:28 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/07/18 06:53:37 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,16 +56,16 @@ int			builtin_cd(t_env **env, char **args)
 		if (!ft_strcmp(*args, '-'))
 		{
 			print_pwd = true;
-			curpath = getenv(*env, "OLDPWD=", 7);
+			curpath = _getenv(*env, "OLDPWD=", 7);
 		}
 		else if (!*args)
-			curpath = getenv(*env, "HOME=", 5);
+			curpath = _getenv(*env, "HOME=", 5);
 		else
 			curpath = *args;
-		builtin_setenv(env, "OLDPWD=", getenv(*env, "PWD=", 4));
+		builtin_setenv(env, "OLDPWD=", _getenv(*env, "PWD=", 4));
 		builtin_setenv(env, "PWD=", *args);
 		if (print_pwd)
-			ft_putendl(getenv(*env, "PWD=", 4));
+			ft_putendl(_getenv(*env, "PWD=", 4));
 		return (chdir(curpath));
 	}
 	return (0);
