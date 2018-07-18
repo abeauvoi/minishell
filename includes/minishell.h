@@ -13,6 +13,8 @@
 # include <termios.h>
 # include <term.h>
 
+# define BUILTIN_CD_USAGE "cd: usage: cd [-L|-P] [dir]"
+
 /*
 ** Sections : signals, core, expansions, env, check_command, list, exec_builtin,
 ** builtin

@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/08 05:13:12 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/07/13 01:21:45 by jolabour         ###   ########.fr       */
+/*   Updated: 2018/07/18 00:37:24 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,6 @@ void		builtin_echo(char **args, size_t total_length)
 	ft_strdel(&output);
 }
 
-/*void		builtin_cd(const char **args)
-{
-}
-*/
 void		builtin_env(t_env *env)
 {
 	while (env)
@@ -54,7 +50,8 @@ int			check_name(char *name)
 		return (0);
 	while (name[i])
 	{
-		if ((name[i] < 'A' || name[i] > 'Z') && (name[i] < 'a' || name[i] > 'z') && (name[i] < '0' || name[i] > '9') && !(name[i] == '_'))
+		if ((name[i] < 'A' || name[i] > 'Z') && (name[i] < 'a' || name[i] > 'z')
+				&& (name[i] < '0' || name[i] > '9') && !(name[i] == '_'))
 			return (0);
 		i++;
 	}
@@ -71,7 +68,8 @@ void		builtin_setenv(t_env **env, char *name, char *content)
 
 	if (!check_name(name))
 	{
-		ft_putendl("setenv: Variable name must contain alphanumeric characters and must begin with a letter.");
+		ft_putendl("setenv: Variable name must contain alphanumeric characters \
+				and must begin with a letter.");
 		return ;
 	}
 	len = ft_strlen(name);

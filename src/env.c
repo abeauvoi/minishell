@@ -28,38 +28,21 @@ void	get_dir(t_minishell *data)
 	free(tmp);
 }
 
-char	*str_path(t_env *list)
+char	*getenv(t_env *list, char *name, size_t len)
 {
-	char *path;
+	char	*str;
 
-	path = NULL;
+	str = NULL;
 	while (list)
 	{
-		if (ft_strncmp(list->str, "PATH=", 5) == 0)
+		if (ft_strncmp(list->str, name, len) == 0)
 		{
-			path = list->str;
+			str = list->str;
 			break ;
 		}
 		list = list->next;
 	}
-	return (path ? path + 5 : path);
-}
-
-char	*get_pwd(t_env *list)
-{
-	char *pwd;
-
-	pwd = NULL;
-	while (list)
-	{
-		if (ft_strncmp(list->str, "PWD=", 4) == 0)
-		{
-			pwd = list->str;
-			break ;
-		}
-		list = list->next;
-	}
-	return (pwd ? pwd + 4 : pwd);
+	return (str ? str + len : str);
 }
 
 void	get_env(t_minishell *data, t_env *list)
@@ -67,8 +50,8 @@ void	get_env(t_minishell *data, t_env *list)
 	char *path;
 	char *pwd;
 
-	pwd = get_pwd(list);
-	path = str_path(list);
+	pwd = getenv(list, "PWD=", sizeof("PWD=") - 1);
+	path = getenv(list, "PATH=", sizeof("PATH=") - 1);
 	if (path)
 		data->bin_dirs = ft_strsplit(path, ':');
 	if (pwd)
