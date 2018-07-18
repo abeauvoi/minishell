@@ -67,7 +67,7 @@ int				get_expansions(char **arg, char **env);
 ** env
 */
 
-char			*get_env(t_env *lst, const char *name, size_t len);
+char			*_getenv(t_env *lst, const char *name, size_t len);
 void			init_env(t_minishell *data, t_env *list);
 void			get_dir(t_minishell *data);
 void			init_builtin_tab(t_minishell *data);
