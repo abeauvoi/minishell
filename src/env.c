@@ -69,7 +69,7 @@ void	get_env(t_minishell *data, t_env *list)
 
 	pwd = get_pwd(list);
 	path = str_path(list);
-	if (path)
+	if (path != NULL)
 		data->bin_dirs = ft_strsplit(path, ':');
 	if (pwd)
 		data->pwd = ft_strdup(pwd);

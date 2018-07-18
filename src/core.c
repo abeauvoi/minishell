@@ -1,17 +1,17 @@
 #include "minishell.h"
 #include <stdio.h>
 
-void	free_arg(char **arg)
+void	free_arg(char ***arg)
 {
-	int		i;
+	char	**cpy;
 
-	i = 0;
-	while (arg[i])
-	{
-		ft_strdel(&arg[i]);
-		i++;
-	}
-	free(arg);
+	cpy = *arg;
+	if (*arg == NULL)
+		return ;
+	while (*cpy)
+		ft_strdel(cpy++);
+	free(*arg);
+	(*arg) = NULL;
 }
 
 static void	print_prompt(t_minishell *data)
@@ -55,7 +55,7 @@ void	process(t_minishell *data, t_env **list)
 	ft_strdel(&line);
 	if (get_expansions(data->arg, data->copy_env) == 0)
 	{
-		ft_putendl("please, set the variable HOME for use ~");
+		ft_putendl("please, set the variable HOME to use ~");
 		return ;
 	}
 	if (!data->arg[0])

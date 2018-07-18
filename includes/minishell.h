@@ -12,6 +12,8 @@
 # include <sys/ioctl.h>
 # include <termios.h>
 # include <term.h>
+# include <pwd.h>
+# include <sys/type.h>
 
 /*
 ** Sections : signals, core, expansions, env, check_command, list, exec_builtin,
@@ -49,7 +51,7 @@ void		sigtest(void);
 ** core
 */
 
-void			free_arg(char **arg);
+void			free_arg(char ***arg);
 void			get_fork(t_minishell *data);
 void			process(t_minishell *data, t_env **list);
 

@@ -25,11 +25,11 @@ int		main(int argc, char **argv, char **env)
 	{
 		get_env(&data, list);
 		process(&data, &list);
-		free_arg(data.copy_env);
+		free_arg(&data.copy_env);
 		ft_strdel(&data.pwd);
-		free_arg(data.bin_dirs);
+		free_arg(&data.bin_dirs);
 		ft_strdel(&data.dir);
-		free_arg(data.arg);
+		free_arg(&data.arg);
 	}
 	return (0);
 }
