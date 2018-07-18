@@ -13,7 +13,6 @@
 # include <termios.h>
 # include <term.h>
 # include <pwd.h>
-# include <sys/type.h>
 
 # define BUILTIN_CD_USAGE "cd: usage: cd [-L|-P] [dir]"
 
