@@ -60,7 +60,8 @@ void			process(t_minishell *data, t_env **list);
 ** expansions
 */
 
-int				get_expansions(char **arg, t_env *env);
+char			*get_tilde(char *arg, char **env);
+int				get_expansions(char **arg, char **env);
 
 /*
 ** env
@@ -98,6 +99,7 @@ void			exec_builtin(t_minishell *data, int i, t_env **list);
 ** builtin
 */
 
+int				builtin_cd(t_env **env, char **args);
 void			builtin_env_test(char **env);
 void			builtin_setenv(t_env **env, char *name, char *content);
 void			builtin_echo(char **args, size_t total_length);

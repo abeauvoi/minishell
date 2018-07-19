@@ -1,3 +1,11 @@
 #Carlos adds :
 
--> leaks resolved (j'ai trouvé un pointeur perdu et remi le free_arg comme avant ça a l'air de fonctionner)
+-> crash de la condition get_expansions dans process avec une chaîne vide : résolu √
+
+-> leak dans le get_fork avec le data->valid_path : résolu √
+
+-> rendu visuel du makefile : simplifié √
+
+-> fonction builtin_cd : amélioré √
+
+-> affichage d'un "=" en trop dans le pwd et mauvais affichage du path dans certain cas (cd) : non résolu X

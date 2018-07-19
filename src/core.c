@@ -31,14 +31,12 @@ void	get_fork(t_minishell *data)
 {
 	pid_t	father;
 
-	(void)data;
 	father = fork();
 	if (father > 0)
 		wait(0);
 	if (father == 0)
 	{
 		execve(data->valide_path, data->arg, data->copy_env);
-		ft_strdel(&data->valide_path);
 		exit(0);
 	}
 }
@@ -47,15 +45,12 @@ void	process(t_minishell *data, t_env **list)
 {
 	char	*line;
 	int		i;
-
 	i = 0;
 	print_prompt(data);
 	while (get_next_line(1, &line) != 2);
 	data->arg = ft_strsplit(line, ' ');
 	ft_strdel(&line);
-	if (!data->arg[0])
-		return ;
-	if (get_expansions(data->arg, *list) == 0)
+	if (!data->arg[0] || get_expansions(data->arg, data->copy_env) == 0)
 		return ;
 	if ((i = check_builtin(data)) >= 0)
 		exec_builtin(data, i, list);

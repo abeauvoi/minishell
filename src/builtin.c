@@ -66,7 +66,7 @@ void		builtin_setenv(t_env **env, char *name, char *content)
 	t_env	*new;
 	t_env	*ptr;
 
-	if (!check_name(name))
+	if (check_name(name) == 1)
 	{
 		ft_putendl("setenv: Variable name must contain alphanumeric characters "
 				"and must begin with a letter.");

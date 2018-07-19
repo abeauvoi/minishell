@@ -49,21 +49,21 @@ int			builtin_cd(t_env **env, char **args)
 	char	*curpath;
 
 	follow_symlinks = true;
-	if ((pos_arg = parse_options(&args[1], &follow_symlinks)) != -1)
+	if ((pos_arg = parse_options(args, &follow_symlinks)) != -1)
 	{
 		args += pos_arg;
 		print_pwd = false;
-		if (!ft_strcmp(*args, '-'))
+		if (args[1] && !ft_strcmp(args[1], "-"))
 		{
 			print_pwd = true;
 			curpath = _getenv(*env, "OLDPWD=", 7);
 		}
-		else if (!*args)
+		else if (!args[1])
 			curpath = _getenv(*env, "HOME=", 5);
 		else
-			curpath = *args;
+			curpath = args[1];
 		builtin_setenv(env, "OLDPWD=", _getenv(*env, "PWD=", 4));
-		builtin_setenv(env, "PWD=", *args);
+		builtin_setenv(env, "PWD=", args[1]);
 		if (print_pwd)
 			ft_putendl(_getenv(*env, "PWD=", 4));
 		return (chdir(curpath));
