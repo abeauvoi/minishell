@@ -53,9 +53,9 @@ void	process(t_minishell *data, t_env **list)
 	while (get_next_line(1, &line) != 2);
 	data->arg = ft_strsplit(line, ' ');
 	ft_strdel(&line);
-	if (get_expansions(data->arg, data->copy_env) == 0)
-		return ;
 	if (!data->arg[0])
+		return ;
+	if (get_expansions(data->arg, *list) == 0)
 		return ;
 	if ((i = check_builtin(data)) >= 0)
 		exec_builtin(data, i, list);

@@ -60,8 +60,7 @@ void			process(t_minishell *data, t_env **list);
 ** expansions
 */
 
-char			*get_tilde(char *arg, char **env);
-int				get_expansions(char **arg, char **env);
+int				get_expansions(char **arg, t_env *env);
 
 /*
 ** env
