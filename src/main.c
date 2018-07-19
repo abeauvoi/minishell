@@ -30,7 +30,6 @@ int		main(int argc, char **argv, char **env)
 		free_arg(&data.bin_dirs);
 		ft_strdel(&data.dir);
 		free_arg(&data.arg);
-		ft_strdel(&data.valide_path);
 	}
 	return (0);
 }
