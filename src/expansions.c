@@ -6,7 +6,7 @@
 /*   By: jolabour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/12 01:23:26 by jolabour          #+#    #+#             */
-/*   Updated: 2018/07/19 04:03:38 by jolabour         ###   ########.fr       */
+/*   Updated: 2018/07/20 02:40:09 by jolabour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,16 +65,61 @@ static int	get_tilde(char **arg, t_env *env)
 	return (1);
 }
 
-int		get_expansions(char **arg, t_env *env)
+static int		replace_dollars(char **arg, char *p, t_env *env, size_t len)
 {
-	if ((!ft_strncmp(*arg, "setenv", 6)) || (!ft_strncmp(*arg, "unsetenv", 8)))
-		return (1);
-	while (*++arg)
+	char	*tmp;
+	char	*tmp2;
+	char	*data;
+	char	*tmp3;
+
+	tmp2 = ft_strsub(*arg, 0, (p - *arg) - 1);
+	tmp = p;
+	while (*tmp && *tmp != '$' && *tmp != '/')
+		++tmp;
+	if ((data = _getenv(env, p, tmp - p + 1)) != NULL)
 	{
-		if (*arg[0] == '~' && get_tilde(arg, env) == 0)
+		p = tmp;
+		tmp3 = ft_strjoin(tmp2, data);
+		while (*p)
+			p++;
+		tmp2 = ft_strsub(, i);
+		free(*arg);
+		*arg = ft_strjoin(tmp3, tmp);
+		ft_strdel(&tmp);
+		ft_strdel(&tmp2);
+		return (1);
+	}
+	ft_putstr(tmp);
+	ft_putendl(": Undefinedvariable.");
+	ft_strdel(&tmp);
+	ft_strdel(&tmp2);
+	return (0);
+}
+
+int		get_dollars(char **arg, t_env *env)
+{
+	char	*p;
+
+	p = *arg;
+	while (*p)
+	{
+		if (*p == '$' && replace_dollars(*arg, p + 1, env, ft_strlen(*arg)) == 0)
 			return (0);
-		//if (get_dollars(*arg, env) == 0)
-		//	return (0);
+		p++;
+	}
+	return (1);
+}
+
+int		get_expansions(char **args, t_env *env)
+{
+	if ((!ft_strncmp(*args, "setenv", 6)) || (!ft_strncmp(*args, "unsetenv", 8)))
+		return (1);
+	while (*(++args) != NULL)
+	{
+		if (*args[0] == '~' && get_tilde(args, env) == 0)
+			return (0);
+		if (get_dollars(args, env) == 0)
+			return (0);
 	}
 	return (1);
 }
