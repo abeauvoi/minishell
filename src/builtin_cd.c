@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/18 00:37:39 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/07/20 01:39:55 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/07/23 00:40:08 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,14 @@ int			parse_options(char **args, bool *follow_symlinks)
 		p = *args;
 		while (*++p)
 		{
-			if (ft_strchr("LP", *p) != NULL)
-				*follow_symlinks = *p == 'L';
-			else
+			if (ft_strchr("LP", *p) == NULL)
 			{
 				ft_putstr("cd: -");
 				ft_putchar(*p);
 				ft_putendl(": invalid option:\n" BUILTIN_CD_USAGE);
 				return (-1);
 			}
+			*follow_symlinks = *p == 'L';
 		}
 		++args;
 		++pos_arg;
@@ -51,21 +50,21 @@ int			builtin_cd(t_env **env, char **args)
 	char	*curpath;
 
 	follow_symlinks = true;
-	if ((pos_arg = parse_options(args, &follow_symlinks)) != -1)
+	if ((pos_arg = parse_options(&args[1], &follow_symlinks)) != -1)
 	{
 		args += pos_arg;
 		print_pwd = false;
-		if (args[0] && !ft_strcmp(args[0], "-"))
+		if (*args && !ft_strcmp(*args, "-"))
 		{
 			print_pwd = true;
 			curpath = _getenv(*env, "OLDPWD=", 7);
 		}
-		else if (!args[0])
+		else if (!*args)
 			curpath = _getenv(*env, "HOME=", 5);
 		else
-			curpath = args[0];
+			curpath = *args;
 		builtin_setenv(env, "OLDPWD=", _getenv(*env, "PWD=", 4));
-		builtin_setenv(env, "PWD=", args[0]);
+		builtin_setenv(env, "PWD=", *args);
 		if (print_pwd)
 			ft_putendl(_getenv(*env, "PWD=", 4));
 		return (chdir(curpath));
