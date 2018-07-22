@@ -66,5 +66,6 @@ void	process(t_minishell *data, t_env **list)
 			return ;
 		}
 		get_fork(data);
+		ft_strdel(&data->valide_path);
 	}
 }

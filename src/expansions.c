@@ -6,7 +6,7 @@
 /*   By: jolabour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/12 01:23:26 by jolabour          #+#    #+#             */
-/*   Updated: 2018/07/22 03:46:24 by jolabour         ###   ########.fr       */
+/*   Updated: 2018/07/22 04:19:37 by jolabour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ static int		replace_dollars(char **arg, char *p, t_env *env)
 		return (1);
 	}
 	ft_putstr(p + 1);
-	ft_putendl(": Undefinedvariable.");
+	ft_putendl(": Undefined variable.");
 	return (0);
 }
 
@@ -103,11 +103,6 @@ int		get_dollars(char **arg, t_env *env)
 	{
 		if (*p == '$')
 		{
-			if (*(p + 1) == '$')
-			{
-				while (*p && *p == '$')
-					p++;
-			}
 			if (*(p + 1) != '\0')
 			{
 				if (replace_dollars(arg, p, env) == 0)
@@ -115,7 +110,8 @@ int		get_dollars(char **arg, t_env *env)
 				else
 					return (get_dollars(arg, env));
 			}
-			return (1);
+			else
+				return (1);
 		}
 		else
 			p++;

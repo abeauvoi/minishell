@@ -29,7 +29,6 @@ int		main(int argc, char **argv, char **env)
 		ft_strdel(&data.pwd);
 		free_arg(&data.bin_dirs);
 		ft_strdel(&data.dir);
-		ft_strdel(&data.valide_path);
 		free_arg(&data.arg);
 	}
 	return (0);

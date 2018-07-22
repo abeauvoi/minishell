@@ -33,6 +33,8 @@ char	*_getenv(t_env *list, const char *name, size_t len)
 	char	*str;
 
 	str = NULL;
+	if (len < 1)
+		return (str);
 	while (list)
 	{
 		if (ft_strncmp(list->str, name, len) == 0)
