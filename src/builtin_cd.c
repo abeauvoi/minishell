@@ -23,13 +23,12 @@ int			parse_options(char **args, bool *follow_symlinks)
 		p = *args;
 		while (*++p)
 		{
-			if (ft_strchr("LP", *p) != NULL)
-				*follow_symlinks = *p == 'L';
-			else
+			if (ft_strchr("LP", *p) == NULL)
 			{
 				ft_putendl("Invalid option:\n" BUILTIN_CD_USAGE);
 				return (-1);
 			}
+			*follow_symlinks = *p == 'L';
 		}
 		++args;
 		++pos_arg;
