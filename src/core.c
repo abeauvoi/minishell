@@ -31,14 +31,12 @@ void	get_fork(t_minishell *data)
 {
 	pid_t	father;
 
-	(void)data;
 	father = fork();
 	if (father > 0)
 		wait(0);
 	if (father == 0)
 	{
 		execve(data->valide_path, data->arg, data->copy_env);
-		ft_strdel(&data->valide_path);
 		exit(0);
 	}
 }
