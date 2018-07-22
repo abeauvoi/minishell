@@ -6,7 +6,7 @@
 /*   By: jolabour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/12 01:23:26 by jolabour          #+#    #+#             */
-/*   Updated: 2018/07/20 02:40:09 by jolabour         ###   ########.fr       */
+/*   Updated: 2018/07/22 03:21:48 by jolabour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ static int	get_tilde(char **arg, t_env *env)
 {
 	void	*tmp;
 
+	if ((!ft_strncmp(*arg, "setenv", 6)) || (!ft_strncmp(*arg, "unsetenv", 8)))
+		return (1);
 	if ((*arg)[1] == '/' || !(*arg)[1])
 	{
 		if ((*arg = remplace_tilde(*arg, env, ft_strlen(*arg))))
@@ -65,34 +67,30 @@ static int	get_tilde(char **arg, t_env *env)
 	return (1);
 }
 
-static int		replace_dollars(char **arg, char *p, t_env *env, size_t len)
+static int		replace_dollars(char **arg, char *p, t_env *env)
 {
 	char	*tmp;
 	char	*tmp2;
 	char	*data;
 	char	*tmp3;
 
-	tmp2 = ft_strsub(*arg, 0, (p - *arg) - 1);
-	tmp = p;
+	tmp = p + 1;
 	while (*tmp && *tmp != '$' && *tmp != '/')
 		++tmp;
-	if ((data = _getenv(env, p, tmp - p + 1)) != NULL)
+	if ((data = _getenv(env, p + 1, (tmp - p) - 1)) != NULL)
 	{
-		p = tmp;
-		tmp3 = ft_strjoin(tmp2, data);
-		while (*p)
-			p++;
-		tmp2 = ft_strsub(, i);
+		tmp2 = ft_strsub(*arg, 0, (p - *arg));
+		tmp3 = ft_strjoin(tmp2, data + 1);
+		ft_strdel(&tmp2);
+		tmp2 = ft_strdup(tmp);
 		free(*arg);
-		*arg = ft_strjoin(tmp3, tmp);
-		ft_strdel(&tmp);
+		*arg = ft_strjoin(tmp3, tmp2);
+		ft_strdel(&tmp3);
 		ft_strdel(&tmp2);
 		return (1);
 	}
-	ft_putstr(tmp);
+	ft_putstr(p + 1);
 	ft_putendl(": Undefinedvariable.");
-	ft_strdel(&tmp);
-	ft_strdel(&tmp2);
 	return (0);
 }
 
@@ -103,17 +101,25 @@ int		get_dollars(char **arg, t_env *env)
 	p = *arg;
 	while (*p)
 	{
-		if (*p == '$' && replace_dollars(*arg, p + 1, env, ft_strlen(*arg)) == 0)
-			return (0);
-		p++;
+		if (*p == '$')
+		{
+			if (*(p + 1) != '\0')
+			{
+				if (replace_dollars(arg, p, env) == 0)
+					return (0);
+				else
+					return (get_dollars(arg, env));
+			}
+			return (1);
+		}
+		else
+			p++;
 	}
 	return (1);
 }
 
 int		get_expansions(char **args, t_env *env)
 {
-	if ((!ft_strncmp(*args, "setenv", 6)) || (!ft_strncmp(*args, "unsetenv", 8)))
-		return (1);
 	while (*(++args) != NULL)
 	{
 		if (*args[0] == '~' && get_tilde(args, env) == 0)
