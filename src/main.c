@@ -13,6 +13,7 @@ int		main(int argc, char **argv, char **env)
 	argv = NULL;;
 	list = set_list(env);
 	init_builtin_tab(&data);
+	init_error_tab(&data);
 	ft_putstr_fd("\033[H\033[2J", 1);
 	if (!(env[0]))
 	{

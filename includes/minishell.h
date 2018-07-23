@@ -34,6 +34,7 @@ typedef struct	s_minishell
 	char	*dir;
 	char	**arg;
 	char	**builtin;
+	char	**errors;
 	char	*valide_path;
 	char	**copy_env;
 	struct termios copy_term;
