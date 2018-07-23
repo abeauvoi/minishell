@@ -53,10 +53,12 @@ void	process(t_minishell *data, t_env **list)
 	ft_strdel(&line);
 	if (!data->arg[0])
 		return ;
-	if (get_expansions(data->arg, *list) == 0)
-		return ;
 	if ((i = check_builtin(data)) >= 0)
+	{
+		if (get_expansions(data->arg, *list) == 0)
+			return ;
 		exec_builtin(data, i, list);
+	}
 	else
 	{
 		if ((data->valide_path = check_access(data)) == NULL)
@@ -65,6 +67,8 @@ void	process(t_minishell *data, t_env **list)
 			ft_putendl(data->arg[0]);
 			return ;
 		}
+		if (get_expansions(data->arg, *list) == 0)
+			return ;
 		get_fork(data);
 		ft_strdel(&data->valide_path);
 	}
