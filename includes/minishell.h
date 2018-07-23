@@ -37,10 +37,6 @@ typedef enum	e_errno_val
 	_ENOMEM,
 	_EACCES,
 	_EFAULT,
-# ifndef _POSIX_SOURCE
-	_ENOBLK,
-	_EBUSY,
-# endif
 	_EEXIST,
 	_EXDEV,
 	_ENODEV,
@@ -50,9 +46,6 @@ typedef enum	e_errno_val
 	_ENFILE,
 	_EMFILE,
 	_ENOTTY,
-# ifndef _POSIX_SOURCE
-	_ETXTBSY,
-# endif
 	_EFBIG,
 	_ENOSPC,
 	_ESPIPE,
