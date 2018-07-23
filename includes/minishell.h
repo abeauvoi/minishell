@@ -21,6 +21,51 @@
 ** builtin
 */
 
+typedef enum	e_errno_val
+{
+	_EPERM = 1,
+	_ENOENT,
+	_ESRCH,
+	_EINTR,
+	_EIO,
+	_ENXIO,
+	_E2BIG,
+	_ENOEXEC,
+	_EBADF,
+	_ECHILD,
+	_EDEADLK,
+	_ENOMEM,
+	_EACCES,
+	_EFAULT,
+# ifndef _POSIX_SOURCE
+	_ENOBLK,
+	_EBUSY,
+# endif
+	_EEXIST,
+	_EXDEV,
+	_ENODEV,
+	_ENOTDIR,
+	_EISDIR,
+	_EINVAL,
+	_ENFILE,
+	_EMFILE,
+	_ENOTTY,
+# ifndef _POSIX_SOURCE
+	_ETXTBSY,
+# endif
+	_EFBIG,
+	_ENOSPC,
+	_ESPIPE,
+	_EROFS,
+	_EMLINK,
+	_EPIPE,
+	_ELOOP = 62,
+	_ENAMETOOLONG,
+	_ERRNO_VALUES
+}				t_errno;
+
+static t_errno	g_errno;
+
 typedef struct	s_env
 {
 	char	*str;

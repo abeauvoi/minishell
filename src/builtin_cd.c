@@ -6,13 +6,13 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/18 00:37:39 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/07/23 00:40:08 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/07/23 02:39:28 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int			parse_options(char **args, bool *follow_symlinks)
+static int		parse_options(char **args, bool *no_symlinks)
 {
 	char	*p;
 	int		pos_arg;
@@ -30,7 +30,7 @@ int			parse_options(char **args, bool *follow_symlinks)
 				ft_putendl(": invalid option:\n" BUILTIN_CD_USAGE);
 				return (-1);
 			}
-			*follow_symlinks = *p == 'L';
+			*no_symlinks = *p == 'P';
 		}
 		++args;
 		++pos_arg;
@@ -44,13 +44,13 @@ int			parse_options(char **args, bool *follow_symlinks)
 
 int			builtin_cd(t_env **env, char **args)
 {
-	bool	follow_symlinks;
+	bool	no_symlinks;
 	bool	print_pwd;
 	int		pos_arg;
 	char	*curpath;
 
-	follow_symlinks = true;
-	if ((pos_arg = parse_options(&args[1], &follow_symlinks)) != -1)
+	no_symlinks = false;
+	if ((pos_arg = parse_options(&args[1], &no_symlinks)) != -1)
 	{
 		args += pos_arg;
 		print_pwd = false;
