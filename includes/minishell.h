@@ -6,7 +6,7 @@
 /*   By: jolabour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/23 03:27:39 by jolabour          #+#    #+#             */
-/*   Updated: 2018/07/23 03:27:43 by jolabour         ###   ########.fr       */
+/*   Updated: 2018/07/23 04:43:56 by jolabour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,41 +35,19 @@
 
 typedef enum	e_errno_val
 {
-	_EPERM = 1,
-	_ENOENT,
-	_ESRCH,
-	_EINTR,
-	_EIO,
-	_ENXIO,
-	_E2BIG,
-	_ENOEXEC,
-	_EBADF,
-	_ECHILD,
-	_EDEADLK,
 	_ENOMEM,
-	_EACCES,
-	_EFAULT,
-	_EEXIST,
-	_EXDEV,
-	_ENODEV,
-	_ENOTDIR,
-	_EISDIR,
-	_EINVAL,
-	_ENFILE,
-	_EMFILE,
-	_ENOTTY,
-	_EFBIG,
-	_ENOSPC,
-	_ESPIPE,
-	_EROFS,
-	_EMLINK,
-	_EPIPE,
-	_ELOOP = 62,
 	_ENAMETOOLONG,
+	_ENOENV,
+	_ENAMEENV,
+	_ENOHOME,
+	_ENOUSER,
+	_ENOVAR,
+	_ENOCMD,
 	_ERRNO_VALUES
 }				t_errno;
 
 static t_errno	g_errno;
+static const char	*g_errors[_ERRNO_VALUES];
 
 typedef struct	s_env
 {
@@ -98,6 +76,17 @@ t_minishell		g_mini;
 
 int			init(struct termios *term);
 void		sigtest(void);
+
+
+/*
+** errno
+*/
+
+void		init_error_tab(void);
+void		print_error(int error_code);
+void		print_error_and_exit(int error_code);
+void		print_error_first(int error_code);
+int			__set_errno(int n);
 
 /*
 ** core
