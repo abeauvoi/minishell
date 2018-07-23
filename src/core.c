@@ -1,5 +1,4 @@
 #include "minishell.h"
-#include <stdio.h>
 
 void	free_arg(char ***arg)
 {
@@ -23,20 +22,24 @@ static void	print_prompt(t_env *list)
 	ft_putstr("\x1B[1;33m");
 	ft_putstr("| ");
 	ft_putstr("\x1B[1;36m");
-	pwd = ft_getenv(list, "PWD=", 4);
-	home = ft_getenv(list, "HOME=", 5);
-	len_home = ft_strlen(home);
-	if (home[len_home - 1] == '/')
-		--len_home;
-	if (ft_strncmp(pwd, home, len_home) == 0)
+	if ((pwd = ft_getenv(list, "PWD=", 4)) != NULL)
 	{
-		pwd += len_home;
-		ft_putchar('~');
-		if (pwd[0] == '/' && pwd[1] != '\0')
+		if ((home = ft_getenv(list, "HOME=", 5)) != NULL)
+		{
+			len_home = ft_strlen(home);
+			if (home[len_home - 1] == '/')
+				--len_home;
+		}
+		if (home && ft_strncmp(pwd, home, (home ? len_home : 0)) == 0)
+		{
+			pwd += len_home;
+			ft_putchar('~');
+			if (pwd[0] == '/' && pwd[1] != '\0')
+				ft_putstr(pwd);
+		}
+		else
 			ft_putstr(pwd);
 	}
-	else
-		ft_putstr(pwd);
 	ft_putstr("\x1B[1;33m");
 	ft_putstr(" | ");
 	ft_putstr("\x1B[1;32m");

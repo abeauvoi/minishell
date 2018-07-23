@@ -12,24 +12,6 @@ void	init_builtin_tab(t_minishell *data)
 	data->builtin[5] = "exit";
 }
 
-void	get_dir(t_minishell *data)
-{
-	char	**tmp;
-	int		i;
-
-	if (!(tmp = ft_strsplit(data->pwd, '/')))
-		print_error_and_exit(_ENOMEM);
-	i = 0;
-	while (tmp[i])
-		i++;
-	if (!(data->dir = ft_strdup(tmp[i - 1])))
-		print_error_and_exit(_ENOMEM);
-	i = 0;
-	while (tmp[i])
-		ft_strdel(tmp + i++);
-	free(tmp);
-}
-
 char	*ft_getenv(t_env *list, const char *name, size_t len)
 {
 	char	*str;
@@ -66,6 +48,5 @@ void	init_env(t_minishell *data, t_env *list)
 		if (!(data->pwd = ft_strdup(pwd)))
 			print_error_and_exit(_ENOMEM);
 	}
-	//get_dir(data);
 	list_to_tab(list, data);
 }
