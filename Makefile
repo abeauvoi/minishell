@@ -6,7 +6,7 @@
 #    By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/17 15:44:28 by abeauvoi          #+#    #+#              #
-#    Updated: 2018/07/20 01:02:43 by jolabour         ###   ########.fr        #
+#    Updated: 2018/07/20 02:19:40 by abeauvoi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,8 @@ LFLAGS		= -L$(LIB_DIR) -lft
 LIB		= libft.a
 COMP		= $(CC) $(CFLAGS) -o $@ -c $<
 LINK		= $(CC) $(CFLAGS) $(LFLAGS) -o $@ $(filter-out $(LIB_DIR)/$(LIB), $^)
+NUMCORES 	= $(sysctl -n hw.ncpu)
+_MAKEFLAGS	= -j$(echo $(NUMCORES)+1| bc) -l$(NUMCORES) -C $(LIB_DIR)
 
 #
 # Rules
@@ -49,7 +51,7 @@ debug: CFLAGS += -g3
 debug: clean all
 
 $(LIB_DIR)/$(LIB):
-	@make -C $(LIB_DIR)
+	@make $(_MAKEFLAGS)
 
 $(NAME): $(LIB_DIR)/$(LIB) $(OBJS)
 	@$(LINK)
@@ -61,13 +63,13 @@ $(OBJS_DIR)/%.o: %.c
 
 clean:
 	@rm $(OBJS) 2> /dev/null || true
-	@make -C $(LIB_DIR) $@
+	@make $(_MAKEFLAGS) $@
 	@rm -rf $(OBJS_DIR)
 	@echo "cleaned .o files"
 
 fclean: clean
 	@rm $(NAME) 2> /dev/null || true
-	@make -C $(LIB_DIR) $@
+	@make $(_MAKEFLAGS) $@
 	@echo "removed binary"
 
 re: fclean all

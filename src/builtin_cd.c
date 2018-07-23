@@ -6,29 +6,31 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/18 00:37:39 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/07/23 02:54:50 by jolabour         ###   ########.fr       */
+/*   Updated: 2018/07/23 02:59:43 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int			parse_options(char **args, bool *follow_symlinks)
+static int		parse_options(char **args, bool *no_symlinks)
 {
 	char	*p;
 	int		pos_arg;
 
 	pos_arg = 0;
-	while (*args && *args[0] == '-')
+	while (*args && (*args)[0] == '-')
 	{
 		p = *args;
 		while (*++p)
 		{
 			if (ft_strchr("LP", *p) == NULL)
 			{
-				ft_putendl("Invalid option:\n" BUILTIN_CD_USAGE);
+				ft_putstr("cd: -");
+				ft_putchar(*p);
+				ft_putendl(": invalid option:\n" BUILTIN_CD_USAGE);
 				return (-1);
 			}
-			*follow_symlinks = *p == 'L';
+			*no_symlinks = *p == 'P';
 		}
 		++args;
 		++pos_arg;
@@ -42,17 +44,17 @@ int			parse_options(char **args, bool *follow_symlinks)
 
 int			builtin_cd(t_env **env, char **args)
 {
-	bool	follow_symlinks;
+	bool	no_symlinks;
 	bool	print_pwd;
 	int		pos_arg;
 	char	*curpath;
 
-	follow_symlinks = true;
-	if ((pos_arg = parse_options(&args[1], &follow_symlinks)) != -1)
+	no_symlinks = false;
+	if ((pos_arg = parse_options(&args[1], &no_symlinks)) != -1)
 	{
 		args += pos_arg;
 		print_pwd = false;
-		if (!ft_strcmp(*args, "-"))
+		if (*args && !ft_strcmp(*args, "-"))
 		{
 			print_pwd = true;
 			curpath = _getenv(*env, "OLDPWD=", 7);

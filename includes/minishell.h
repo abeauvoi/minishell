@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jolabour <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/07/23 03:27:39 by jolabour          #+#    #+#             */
+/*   Updated: 2018/07/23 03:27:43 by jolabour         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
@@ -20,6 +32,44 @@
 ** Sections : signals, core, expansions, env, check_command, list, exec_builtin,
 ** builtin
 */
+
+typedef enum	e_errno_val
+{
+	_EPERM = 1,
+	_ENOENT,
+	_ESRCH,
+	_EINTR,
+	_EIO,
+	_ENXIO,
+	_E2BIG,
+	_ENOEXEC,
+	_EBADF,
+	_ECHILD,
+	_EDEADLK,
+	_ENOMEM,
+	_EACCES,
+	_EFAULT,
+	_EEXIST,
+	_EXDEV,
+	_ENODEV,
+	_ENOTDIR,
+	_EISDIR,
+	_EINVAL,
+	_ENFILE,
+	_EMFILE,
+	_ENOTTY,
+	_EFBIG,
+	_ENOSPC,
+	_ESPIPE,
+	_EROFS,
+	_EMLINK,
+	_EPIPE,
+	_ELOOP = 62,
+	_ENAMETOOLONG,
+	_ERRNO_VALUES
+}				t_errno;
+
+static t_errno	g_errno;
 
 typedef struct	s_env
 {
