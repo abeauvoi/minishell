@@ -6,7 +6,7 @@
 /*   By: jolabour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/12 01:23:26 by jolabour          #+#    #+#             */
-/*   Updated: 2018/07/22 04:19:37 by jolabour         ###   ########.fr       */
+/*   Updated: 2018/07/23 02:56:42 by jolabour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,22 @@ static int		replace_dollars(char **arg, char *p, t_env *env)
 	tmp = p + 1;
 	while (*tmp && *tmp != '$' && *tmp != '/')
 		++tmp;
-	if ((data = _getenv(env, p + 1, (tmp - p) - 1)) != NULL)
+	if ((data = _getenv(env, p + 1, (tmp - p) - 1)) != NULL || *(p + 1) == '$')
 	{
 		tmp2 = ft_strsub(*arg, 0, (p - *arg));
-		tmp3 = ft_strjoin(tmp2, data + 1);
-		ft_strdel(&tmp2);
-		tmp2 = ft_strdup(tmp);
+		if (*(p + 1) == '$')
+		{
+			tmp3 = ft_strjoin(tmp2, data = ft_itoa((int)getpid));
+			ft_strdel(&data);
+			ft_strdel(&tmp2);
+			tmp2 = ft_strdup(tmp + 1);
+		}
+		else
+		{
+			tmp3 = ft_strjoin(tmp2, data + 1);
+			ft_strdel(&tmp2);
+			tmp2 = ft_strdup(tmp);
+		}
 		free(*arg);
 		*arg = ft_strjoin(tmp3, tmp2);
 		ft_strdel(&tmp3);
@@ -101,20 +111,13 @@ int		get_dollars(char **arg, t_env *env)
 	p = *arg;
 	while (*p)
 	{
-		if (*p == '$')
+		if (*p == '$' && *(p + 1) != '/' && *(p + 1) != '\0')
 		{
-			if (*(p + 1) != '\0')
-			{
-				if (replace_dollars(arg, p, env) == 0)
-					return (0);
-				else
-					return (get_dollars(arg, env));
-			}
-			else
-				return (1);
+			if (replace_dollars(arg, p, env) == 0)
+				return (0);
+			p = *arg;
 		}
-		else
-			p++;
+		p++;
 	}
 	return (1);
 }
