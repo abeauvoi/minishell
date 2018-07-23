@@ -6,19 +6,25 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/18 00:37:39 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/07/23 08:47:20 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/07/24 00:34:38 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/*
+** '-' is a special character, so in order to parse options, a '-' followed by
+** '\0' is considered an argument.
+*/
+
 static int		parse_options(char **args, bool *no_symlinks)
 {
 	char	*p;
-	int		pos_arg;
+	int		i;
 
-	pos_arg = 0;
-	while (*args && (*args)[0] == '-')
+	i = 0;
+	*no_symlinks = false;
+	while (*args && (*args)[0] == '-' && (*args)[1] != '\0')
 	{
 		p = *args;
 		while (*++p)
@@ -33,9 +39,9 @@ static int		parse_options(char **args, bool *no_symlinks)
 			*no_symlinks = *p == 'P';
 		}
 		++args;
-		++pos_arg;
+		++i;
 	}
-	return (pos_arg);
+	return (i);
 }
 
 /*
@@ -46,16 +52,16 @@ int			builtin_cd(t_env **env, char **args)
 {
 	bool	no_symlinks;
 	bool	print_pwd;
-	int		pos_arg;
+	int		i;
 	char	*curpath;
-	int		r;
+	char	cwd[PATH_MAX];
 
-	no_symlinks = false;
-	if ((pos_arg = parse_options(&args[1], &no_symlinks)) != -1)
+	if ((i = parse_options(++args, &no_symlinks)) != -1)
 	{
-		args += pos_arg + 1;
+		ft_bzero(cwd, PATH_MAX);
+		args += i;
 		print_pwd = false;
-		if (*args && !ft_strcmp(*args, "-"))
+		if (*args && ft_strcmp(*args, "-") == 0)
 		{
 			print_pwd = true;
 			curpath = ft_getenv(*env, "OLDPWD=", 7);
@@ -71,10 +77,10 @@ int			builtin_cd(t_env **env, char **args)
 			print_error(g_errno);
 			return (-1);
 		}
-		r = chdir(curpath);
+		i = chdir(curpath);
 		if (no_symlinks && *args && !print_pwd)
 			free(curpath);
-		if (r < 0)
+		if (i == -1)
 		{
 			ft_putstr_fd("cd: ", 2);
 			ft_putstr_fd(curpath, 2);
@@ -83,11 +89,11 @@ int			builtin_cd(t_env **env, char **args)
 		else
 		{
 			builtin_setenv(env, "OLDPWD", ft_getenv(*env, "PWD=", 4));
-			builtin_setenv(env, "PWD", *args);
+			builtin_setenv(env, "PWD", getcwd(cwd, PATH_MAX - 1));
 		}
 		if (print_pwd)
 			ft_putendl(ft_getenv(*env, "PWD=", 4));
-		return (r);
+		return (i);
 	}
 	return (0);
 }

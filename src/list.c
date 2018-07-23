@@ -6,13 +6,13 @@
 /*   By: jolabour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/09 23:55:31 by jolabour          #+#    #+#             */
-/*   Updated: 2018/07/23 03:46:52 by jolabour         ###   ########.fr       */
+/*   Updated: 2018/07/24 00:06:27 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		len_list(t_env *env)
+int			len_list(t_env *env)
 {
 	int		i;
 
@@ -25,7 +25,7 @@ int		len_list(t_env *env)
 	return (i);
 }
 
-void	list_to_tab(t_env *env, t_minishell *data)
+void		list_to_tab(t_env *env, t_minishell *data)
 {
 	int		i;
 
@@ -42,7 +42,7 @@ void	list_to_tab(t_env *env, t_minishell *data)
 	data->copy_env[i] = NULL;
 }
 
-t_env	*create_node(char *str)
+t_env		*create_node(char *str)
 {
 	t_env	*new;
 
@@ -52,7 +52,7 @@ t_env	*create_node(char *str)
 	return (new);
 }
 
-void	lst_push(t_env **head, t_env *new)
+void		lst_push(t_env **head, t_env *new)
 {
 	t_env	*tmp;
 

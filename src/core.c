@@ -14,12 +14,29 @@ void	free_arg(char ***arg)
 	(*arg) = NULL;
 }
 
-static void	print_prompt(t_minishell *data)
+static void	print_prompt(t_env *list)
 {
+	char	*pwd;
+	char	*home;
+	size_t	len_home;
+
 	ft_putstr("\x1B[1;33m");
 	ft_putstr("| ");
 	ft_putstr("\x1B[1;36m");
-	ft_putstr(data->dir);
+	pwd = ft_getenv(list, "PWD=", 4);
+	home = ft_getenv(list, "HOME=", 5);
+	len_home = ft_strlen(home);
+	if (home[len_home - 1] == '/')
+		--len_home;
+	if (ft_strncmp(pwd, home, len_home) == 0)
+	{
+		pwd += len_home;
+		ft_putchar('~');
+		if (pwd[0] == '/' && pwd[1] != '\0')
+			ft_putstr(pwd);
+	}
+	else
+		ft_putstr(pwd);
 	ft_putstr("\x1B[1;33m");
 	ft_putstr(" | ");
 	ft_putstr("\x1B[1;32m");
@@ -47,7 +64,7 @@ void	process(t_minishell *data, t_env **list)
 	int		i;
 
 	i = 0;
-	print_prompt(data);
+	print_prompt(*list);
 	while (get_next_line(1, &line) != 2);
 	if (!(data->arg = ft_strsplit(line, ' ')))
 		print_error_and_exit(_ENOMEM);

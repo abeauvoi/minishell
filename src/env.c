@@ -54,18 +54,18 @@ void	init_env(t_minishell *data, t_env *list)
 	char *path;
 	char *pwd;
 
-	pwd = ft_getenv(list, "PWD=", sizeof("PWD=") - 1);
 	path = ft_getenv(list, "PATH=", sizeof("PATH=") - 1);
 	if (path)
 	{
 		if (!(data->bin_dirs = ft_strsplit(path, ':')))
 			print_error_and_exit(_ENOMEM);
 	}
+	pwd = ft_getenv(list, "PWD=", sizeof("PWD=") - 1);
 	if (pwd)
 	{
 		if (!(data->pwd = ft_strdup(pwd)))
 			print_error_and_exit(_ENOMEM);
 	}
-	get_dir(data);
+	//get_dir(data);
 	list_to_tab(list, data);
 }
