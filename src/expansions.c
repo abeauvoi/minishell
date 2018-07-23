@@ -6,7 +6,7 @@
 /*   By: jolabour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/12 01:23:26 by jolabour          #+#    #+#             */
-/*   Updated: 2018/07/23 04:43:13 by jolabour         ###   ########.fr       */
+/*   Updated: 2018/07/23 06:24:29 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static char		*remplace_tilde(char *arg, t_env *env, size_t arglen)
 	char	*data;
 	char	*result;
 
-	if ((data = _getenv(env, "HOME=", 5)) != NULL)
+	if ((data = ft_getenv(env, "HOME=", 5)) != NULL)
 	{
 		if (arglen == 1)
 		{
@@ -87,13 +87,14 @@ static int		replace_dollars(char **arg, char *p, t_env *env)
 	tmp = p + 1;
 	while (*tmp && *tmp != '$' && *tmp != '/')
 		++tmp;
-	if ((data = _getenv(env, p + 1, (tmp - p) - 1)) != NULL || *(p + 1) == '$')
+	if ((data = ft_getenv(env, p + 1, (tmp - p) - 1)) != NULL || p[1] == '$')
 	{
 		if (!(tmp2 = ft_strsub(*arg, 0, (p - *arg))))
 			print_error_and_exit(_ENOMEM);
-		if (*(p + 1) == '$')
+		if (p[1] == '$')
 		{
-			if (!(tmp3 = ft_strjoin(tmp2, data = ft_itoa((int)getpid))) || !data)
+			if (!(tmp3 = ft_strjoin(tmp2, data = ft_itoa((int)getpid)))
+					|| !data)
 				print_error_and_exit(_ENOMEM);
 			ft_strdel(&data);
 			ft_strdel(&tmp2);
@@ -127,7 +128,7 @@ int		get_dollars(char **arg, t_env *env)
 	p = *arg;
 	while (*p)
 	{
-		if (*p == '$' && *(p + 1) != '/' && *(p + 1) != '\0')
+		if (*p == '$' && p[1] != '/' && p[1] != '\0')
 		{
 			if (replace_dollars(arg, p, env) == 0)
 				return (0);

@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/18 00:37:39 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/07/23 02:59:43 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/07/23 08:47:20 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,26 +48,46 @@ int			builtin_cd(t_env **env, char **args)
 	bool	print_pwd;
 	int		pos_arg;
 	char	*curpath;
+	int		r;
 
 	no_symlinks = false;
 	if ((pos_arg = parse_options(&args[1], &no_symlinks)) != -1)
 	{
-		args += pos_arg;
+		args += pos_arg + 1;
 		print_pwd = false;
 		if (*args && !ft_strcmp(*args, "-"))
 		{
 			print_pwd = true;
-			curpath = _getenv(*env, "OLDPWD=", 7);
+			curpath = ft_getenv(*env, "OLDPWD=", 7);
 		}
 		else if (!*args)
-			curpath = _getenv(*env, "HOME=", 5);
+			curpath = ft_getenv(*env, "HOME=", 5);
 		else
-			curpath = *args;
-		builtin_setenv(env, "OLDPWD=", _getenv(*env, "PWD=", 4));
-		builtin_setenv(env, "PWD=", *args);
+			curpath = (no_symlinks ? ft_realpath(*args) : *args);
+		if (no_symlinks && !curpath && g_errno)
+		{
+			if (g_errno == _ENOMEM)
+				print_error_and_exit(g_errno);
+			print_error(g_errno);
+			return (-1);
+		}
+		r = chdir(curpath);
+		if (no_symlinks && *args && !print_pwd)
+			free(curpath);
+		if (r < 0)
+		{
+			ft_putstr_fd("cd: ", 2);
+			ft_putstr_fd(curpath, 2);
+			ft_putstr_fd(": No such file or directory\n", 2);
+		}
+		else
+		{
+			builtin_setenv(env, "OLDPWD", ft_getenv(*env, "PWD=", 4));
+			builtin_setenv(env, "PWD", *args);
+		}
 		if (print_pwd)
-			ft_putendl(_getenv(*env, "PWD=", 4));
-		return (chdir(curpath));
+			ft_putendl(ft_getenv(*env, "PWD=", 4));
+		return (r);
 	}
 	return (0);
 }

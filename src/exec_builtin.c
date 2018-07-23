@@ -6,7 +6,7 @@
 /*   By: jolabour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/08 23:26:13 by jolabour          #+#    #+#             */
-/*   Updated: 2018/07/18 06:48:33 by jolabour         ###   ########.fr       */
+/*   Updated: 2018/07/23 08:44:22 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void	exec_builtin(t_minishell *data, int i, t_env **list)
 		len = len_arg(data->arg);
 		builtin_echo(data->arg + 1, len);
 	}
-	//else if (i == 1)
-	//	builtin_cd(data->arg);
+	else if (i == 1)
+		builtin_cd(list, data->arg);
 	else if (i == 2)
 		builtin_env(*list);
 	else if (i == 3)

@@ -9,3 +9,5 @@
 -> fonction builtin_cd : amélioré √
 
 -> affichage d'un "=" en trop dans le pwd et mauvais affichage du path dans certain cas (cd) : non résolu X
+
+-> debug cd : non resolu X

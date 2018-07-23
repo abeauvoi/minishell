@@ -6,10 +6,13 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/23 02:40:03 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/07/23 06:09:26 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/07/23 08:38:03 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <sys/param.h>
 #include "minishell.h"
 
 static char			*free_rpath(char *rpath)
@@ -18,146 +21,118 @@ static char			*free_rpath(char *rpath)
 	return (NULL);
 }
 
-static inline char	*handle_link(int *num_links, char **extra_buf,
-		char **name, char **end)
+static inline char	*substitute_link(t_realpath *vars, const char **name)
 {
-	char buf[PATH_MAX];
-	size_t len;
+	char	buf[PATH_MAX];
+	size_t	len;
+	int		n;
 
-	if (++*num_links > MAXSYMLINKS)
+	if (++vars->num_links > MAXSYMLINKS)
 	{
-		__set_errno(_ELOOP);
+		ft_set_errno(_ELOOP);
 		return (NULL);
 	}
-	if ((n = readlink(rpath, buf, PATH_MAX - 1)) < 0)
+	if ((n = readlink(vars->rpath, buf, PATH_MAX - 1)) < 0)
 		return (NULL);
 	buf[n] = '\0';
-	if (!*extra_buf && !(*extra_buf = (char *)malloc(PATH_MAX)))
-	{
-		__set_errno(_ENOMEM);
-		return (NULL);
-	}
-	len = ft_strlen(*end);
+	len = ft_strlen(vars->end);
 	if ((size_t)(n + len) >= PATH_MAX)
 	{
-		__set_errno(_ENAMETOOLONG);
+		ft_set_errno(_ENAMETOOLONG);
 		return (NULL);
 	}
-	ft_memmove(&(*extra_buf)[n], end, len + 1);
-	*end = memcpy(*extra_buf, buf, n);
-	*name = *end;
+	ft_memmove(&vars->extra_buf[n], vars->end, len + 1);
+	vars->end = ft_memcpy(vars->extra_buf, buf, n);
+	*name = vars->end;
 	if (buf[0] == '/')
-		dest = rpath + 1;
-	else if (dest > rpath + 1)
-		while ((--dest)[-1] != '/')
+		vars->dest = vars->rpath + 1;
+	else if (vars->dest > vars->rpath + 1)
+		while ((--vars->dest)[-1] != '/')
 			;
-	return (rpath);
+	return ((void*)1);
 }
-static inline char	*substitute_path_component(const char *name, char *rpath,
-		char *dest, char **rpath_limit)
+
+static inline char	*substitute_path_component(const char **name,
+		t_realpath *vars)
 {
 	struct stat	st;
-	size_t		new_size;
-	ptrdiff_t	dest_offset;
-	char		*new_rpath;
 
-	if (dest[-1] != '/')
-		*dest++ = '/';
-	if (dest + (end - start) >= *rpath_limit)
-	{
-		dest_offset = dest - rpath;
-		new_size = *rpath_limit - rpath;
-		new_size += (end - start + 1 > PATH_MAX ? end - start + 1 : PATH_MAX);
-		if (!(new_rpath = (char *)malloc(new_size)))
-			return (NULL);
-		ft_memcpy(new_rpath, rpath, *rpath_limit - rpath + 1);
-		free(rpath);
-		rpath = new_rpath;
-		*rpath_limit = rpath + new_size;
-		dest = rpath + dest_offset;
-	}
-	ft_memcpy(dest, start, end - start);
-	dest += end - start;
-	*dest = '\0';
-	if (stat(rpath, &st) < 0)
+	if (vars->dest[-1] != '/')
+		*vars->dest++ = '/';
+	if (vars->dest + (vars->end - vars->start) >= vars->rpath_limit
+			&& realloc_rpath(vars) == NULL)
+		return (NULL);
+	ft_memcpy(vars->dest, vars->start, vars->end - vars->start);
+	vars->dest += vars->end - vars->start;
+	*vars->dest = '\0';
+	if (stat(vars->rpath, &st) < 0)
 		return (NULL);
 	if (S_ISLNK(st.st_mode))
+		return (substitute_link(vars, name));
+	else if (!S_ISDIR(st.st_mode) && *vars->end != '\0')
 	{
-	}
-	else if (!S_ISDIR(st.st_mode) && *end != '\0')
-	{
-		__set_errno(_ENOTDIR);
+		ft_set_errno(_ENOTDIR);
 		return (NULL);
 	}
-	return (rpath);
+	return ((void*)1);
 }
 
-static inline char	*internal_realpath(const char *name, char *rpath,
-		char *dest, char *rpath_limit)
+static inline char	*internal_realpath(const char *name, t_realpath *vars)
 {
-	char		*start;
-	char		*end;
-	char		*extra_buf;
-	int			n;
-	int			num_links;
-
-	num_links = 0;
-	start = name;
-	while (*start)
+	vars->start = (char *)name;
+	while (*vars->start)
 	{
-		while (*start == '/')
-			++start;
-		end = start;
-		while (*end && *end != '/')
-			++end;
-		if (end - start == 0)
+		while (*vars->start == '/')
+			++vars->start;
+		vars->end = vars->start;
+		while (*vars->end && *vars->end != '/')
+			++vars->end;
+		if (vars->end - vars->start == 0)
 			break ;
-		else if (end - start == 1 && start[0] == '.')
-			;
-		else if (end - start == 2 && start[0] == '.' && start[1] == '.'
-				&& dest > rpath + 1)
-			while ((--dest)[-1] != '/')
+		else if (vars->end - vars->start == 2 && vars->start[0] == '.'
+				&& vars->start[1] == '.' && vars->dest > vars->rpath + 1)
+			while ((--vars->dest)[-1] != '/')
 				;
-		else
-		{
-		}
-		start = end;
+		else if ((vars->end - vars->start > 1
+					|| (vars->end - vars->start == 1 && vars->start[0] != '.'))
+				&& substitute_path_component(&name, vars) == NULL)
+			return (free_rpath(vars->rpath));
+		vars->start = vars->end;
 	}
-	if (dest > rpath + 1 && dest[-1] == '/')
-		--dest;
-	*dest = '\0';
-	return (rpath);
+	if (vars->dest > vars->rpath + 1 && vars->dest[-1] == '/')
+		--vars->dest;
+	*vars->dest = '\0';
+	return (vars->rpath);
 }
 
-char				*_realpath(const char *name)
+char				*ft_realpath(const char *name)
 {
-	char	*rpath;
-	char	*rpath_limit;
-	char	*dest;
+	t_realpath	vars;
 
+	ft_memset(&vars, 0, sizeof(vars));
 	if (!name)
 	{
-		__set_errno(__EINVAL);
+		ft_set_errno(_EINVAL);
 		return (NULL);
 	}
 	if (name[0] == '\0')
 	{
-		__set_errno(__ENOENT);
+		ft_set_errno(_ENOENT);
 		return (NULL);
 	}
-	if (!(rpath = (char *)malloc(PATH_MAX)))
+	if (!(vars.rpath = (char *)malloc(PATH_MAX)))
 		return (NULL);
-	rpath_limit = rpath + PATH_MAX;
+	vars.rpath_limit = vars.rpath + PATH_MAX;
 	if (name[0] != '/')
 	{
-		if (!getcwd(rpath, PATH_MAX))
-			return (free_rpath(rpath));
-		dest = ft_memchr(rpath, '\0');
+		if (getcwd(vars.rpath, PATH_MAX) == NULL)
+			return (free_rpath(vars.rpath));
+		vars.dest = vars.rpath + ft_strlen(vars.rpath);
 	}
 	else
 	{
-		rpath[0] = '/';
-		dest = rpath + 1;
+		vars.rpath[0] = '/';
+		vars.dest = vars.rpath + 1;
 	}
-	return (internal_realpath(name, rpath, dest, rpath_limit));
+	return (internal_realpath(name, &vars));
 }

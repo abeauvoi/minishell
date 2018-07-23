@@ -1,3 +1,5 @@
 minishell
 minishell.dSYM/
 compile_commands.json
+libft/*.[oa]
+obj/
