@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/18 00:37:39 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/07/20 01:27:27 by jolabour         ###   ########.fr       */
+/*   Updated: 2018/07/23 02:54:50 by jolabour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,12 @@ int			parse_options(char **args, bool *follow_symlinks)
 		p = *args;
 		while (*++p)
 		{
-			if (ft_strchr("LP", *p) != NULL)
-				*follow_symlinks = *p == 'L';
-			else
+			if (ft_strchr("LP", *p) == NULL)
 			{
 				ft_putendl("Invalid option:\n" BUILTIN_CD_USAGE);
 				return (-1);
 			}
+			*follow_symlinks = *p == 'L';
 		}
 		++args;
 		++pos_arg;
