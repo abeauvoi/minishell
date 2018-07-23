@@ -6,12 +6,11 @@
 /*   By: jolabour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/12 01:23:26 by jolabour          #+#    #+#             */
-/*   Updated: 2018/07/23 02:54:31 by jolabour         ###   ########.fr       */
+/*   Updated: 2018/07/23 02:56:42 by jolabour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include <unistd.h>
 
 static char		*remplace_tilde(char *arg, t_env *env, size_t arglen)
 {
