@@ -49,7 +49,8 @@ void	process(t_minishell *data, t_env **list)
 	i = 0;
 	print_prompt(data);
 	while (get_next_line(1, &line) != 2);
-	data->arg = ft_strsplit(line, ' ');
+	if (!(data->arg = ft_strsplit(line, ' ')))
+		print_error_and_exit(_ENOMEM);
 	ft_strdel(&line);
 	if (!data->arg[0])
 		return ;
@@ -63,7 +64,7 @@ void	process(t_minishell *data, t_env **list)
 	{
 		if ((data->valide_path = check_access(data)) == NULL)
 		{
-			ft_putstr("minishell: command not found: ");
+			print_error_first(_ENOCMD);
 			ft_putendl(data->arg[0]);
 			return ;
 		}

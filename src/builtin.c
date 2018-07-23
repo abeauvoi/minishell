@@ -6,7 +6,7 @@
 /*   By: jolabour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/08 05:13:12 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/07/23 02:54:03 by jolabour         ###   ########.fr       */
+/*   Updated: 2018/07/23 04:05:12 by jolabour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void		builtin_echo(char **args, size_t total_length)
 	char	*tmp;
 
 	if (!(output = ft_strnew(total_length)))
-		;
+		print_error_and_exit(_ENOMEM);
 	tmp = output;
 	while (*args)
 	{
@@ -68,26 +68,31 @@ void		builtin_setenv(t_env **env, char *name, char *content)
 
 	if (!check_name(name))
 	{
-		ft_putendl("setenv: Variable name must contain alphanumeric characters "
-				"and must begin with a letter.");
+		print_error(_ENAMEENV);
 		return ;
 	}
 	len = ft_strlen(name);
 	if (content)
 	{
-		tmp2 = ft_strjoin(name, "=");
-		tmp = ft_strjoin(tmp2, content);
+		if (!(tmp2 = ft_strjoin(name, "=")))
+			print_error_and_exit(_ENOMEM);
+		if (!(tmp = ft_strjoin(tmp2, content)))
+			print_error_and_exit(_ENOMEM);
 		ft_strdel(&tmp2);
 	}
 	else
-		tmp = ft_strjoin(name, "=");
+	{
+		if (!(tmp = ft_strjoin(name, "=")))
+			print_error_and_exit(_ENOMEM);
+	}
 	ptr = *env;
 	while (ptr)
 	{
 		if (!ft_strncmp(ptr->str, name, len))
 		{
 			free(ptr->str);
-			ptr->str = ft_strdup(tmp);
+			if (!(ptr->str = ft_strdup(tmp)))
+				print_error_and_exit(_ENOMEM);
 			free(tmp);
 			return ;
 		}

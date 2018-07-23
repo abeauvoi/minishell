@@ -13,12 +13,10 @@ int		main(int argc, char **argv, char **env)
 	argv = NULL;;
 	list = set_list(env);
 	init_builtin_tab(&data);
+	init_error_tab();
 	ft_putstr_fd("\033[H\033[2J", 1);
 	if (!(env[0]))
-	{
-		ft_putendl_fd("error : env is missing", 2);
-		exit(EXIT_FAILURE);
-	}
+		print_error(_ENOENV);
 	//init(&g_mini.copy_term);
 	//sigtest();
 	while (42)

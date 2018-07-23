@@ -6,7 +6,7 @@
 /*   By: jolabour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/09 23:55:31 by jolabour          #+#    #+#             */
-/*   Updated: 2018/07/13 00:54:18 by jolabour         ###   ########.fr       */
+/*   Updated: 2018/07/23 03:46:52 by jolabour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,12 @@ void	list_to_tab(t_env *env, t_minishell *data)
 	int		i;
 
 	if (!(data->copy_env = malloc(sizeof(char *) * (len_list(env) + 1))))
-		return ;
+		print_error_and_exit(_ENOMEM);
 	i = 0;
 	while (env)
 	{
-		data->copy_env[i] = ft_strdup(env->str);
+		if (!(data->copy_env[i] = ft_strdup(env->str)))
+			print_error_and_exit(_ENOMEM);
 		env = env->next;
 		i++;
 	}
@@ -47,7 +48,7 @@ t_env	*create_node(char *str)
 
 	if (!(new = malloc(sizeof(*new))) || !(new->str = ft_strdup(str)))
 		return (NULL);
-		new->next = NULL;
+	new->next = NULL;
 	return (new);
 }
 
@@ -77,7 +78,7 @@ t_env		*set_list(char **env)
 	while (env[i])
 	{
 		if (!(new = create_node(env[i])))
-			return (NULL);
+			print_error_and_exit(_ENOMEM);
 		lst_push(&start, new);
 		i++;
 	}

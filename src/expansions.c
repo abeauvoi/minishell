@@ -6,7 +6,7 @@
 /*   By: jolabour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/12 01:23:26 by jolabour          #+#    #+#             */
-/*   Updated: 2018/07/23 02:56:42 by jolabour         ###   ########.fr       */
+/*   Updated: 2018/07/23 04:43:13 by jolabour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,20 @@ static char		*remplace_tilde(char *arg, t_env *env, size_t arglen)
 	if ((data = _getenv(env, "HOME=", 5)) != NULL)
 	{
 		if (arglen == 1)
-			result = ft_strdup(data);
+		{
+			if (!(result = ft_strdup(data)))
+				print_error_and_exit(_ENOMEM);
+		}
 		else if (data[ft_strlen(data) - 1] == '/')
-			result = ft_strjoin(data, arg + 2);
+		{
+			if (!(result = ft_strjoin(data, arg + 2)))
+				print_error_and_exit(_ENOMEM);
+		}
 		else
-			result = ft_strjoin(data, arg + 1);
+		{
+			if (!(result = ft_strjoin(data, arg + 1)))
+				print_error_and_exit(_ENOMEM);
+		}
 		free(arg);
 		return (result);
 	}
@@ -35,7 +44,8 @@ static char		*get_user(char *user)
 {
 	char *tmp;
 
-	tmp = ft_strjoin("/Users/", user + 1);
+	if (!(tmp = ft_strjoin("/Users/", user + 1)))
+		print_error_and_exit(_ENOMEM);
 	ft_strdel(&user);
 	return (tmp);
 }
@@ -50,14 +60,14 @@ static int	get_tilde(char **arg, t_env *env)
 	{
 		if ((*arg = remplace_tilde(*arg, env, ft_strlen(*arg))))
 			return (1);
-		ft_putendl("please, set the variable HOME to use ~");
+		print_error(_ENOHOME);
 		return (0);
 	}
 	else
 	{
 		if ((tmp = getpwnam((*arg) + 1)) == NULL)
 		{
-			ft_putstr("Unknown user: ");
+			print_error_first(_ENOUSER);
 			ft_putendl((*arg) + 1);
 		}
 		else
@@ -79,28 +89,34 @@ static int		replace_dollars(char **arg, char *p, t_env *env)
 		++tmp;
 	if ((data = _getenv(env, p + 1, (tmp - p) - 1)) != NULL || *(p + 1) == '$')
 	{
-		tmp2 = ft_strsub(*arg, 0, (p - *arg));
+		if (!(tmp2 = ft_strsub(*arg, 0, (p - *arg))))
+			print_error_and_exit(_ENOMEM);
 		if (*(p + 1) == '$')
 		{
-			tmp3 = ft_strjoin(tmp2, data = ft_itoa((int)getpid));
+			if (!(tmp3 = ft_strjoin(tmp2, data = ft_itoa((int)getpid))) || !data)
+				print_error_and_exit(_ENOMEM);
 			ft_strdel(&data);
 			ft_strdel(&tmp2);
-			tmp2 = ft_strdup(tmp + 1);
+			if (!(tmp2 = ft_strdup(tmp + 1)))
+				print_error_and_exit(_ENOMEM);
 		}
 		else
 		{
-			tmp3 = ft_strjoin(tmp2, data + 1);
+			if (!(tmp3 = ft_strjoin(tmp2, data + 1)))
+				print_error_and_exit(_ENOMEM);
 			ft_strdel(&tmp2);
-			tmp2 = ft_strdup(tmp);
+			if (!(tmp2 = ft_strdup(tmp)))
+				print_error_and_exit(_ENOMEM);
 		}
 		free(*arg);
-		*arg = ft_strjoin(tmp3, tmp2);
+		if (!(*arg = ft_strjoin(tmp3, tmp2)))
+			print_error_and_exit(_ENOMEM);
 		ft_strdel(&tmp3);
 		ft_strdel(&tmp2);
 		return (1);
 	}
 	ft_putstr(p + 1);
-	ft_putendl(": Undefined variable.");
+	print_error(_ENOVAR);
 	return (0);
 }
 
