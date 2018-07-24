@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "minishell.h"
 
 void	free_arg(char ***arg)
@@ -71,6 +72,8 @@ void	process(t_minishell *data, t_env **list)
 	while (get_next_line(1, &line) != 2);
 	if (!(data->arg = ft_strsplit(line, ' ')))
 		print_error_and_exit(_ENOMEM);
+	for (int j = 0; data->arg[j]; ++j)
+		printf("[data->arg[%d]:%s]\n", j, data->arg[j]);
 	ft_strdel(&line);
 	if (!data->arg[0])
 		return ;

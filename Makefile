@@ -6,7 +6,7 @@
 #    By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/17 15:44:28 by abeauvoi          #+#    #+#              #
-#    Updated: 2018/07/23 08:37:16 by abeauvoi         ###   ########.fr        #
+#    Updated: 2018/07/24 23:31:44 by abeauvoi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ SRCS		= main.c env.c list.c check_command.c core.c exec_builtin.c \
 # Build
 #
 
+CC 		= gcc
 OBJS		= $(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))
 CFLAGS		= -Wall -Werror -Wextra $(addprefix -I, $(INC_DIRS))
 LFLAGS		= -L$(LIB_DIR) -lft
@@ -49,7 +50,7 @@ _MAKEFLAGS	= -j$(echo $(NUMCORES)+1| bc) -l$(NUMCORES) -C $(LIB_DIR)
 all: $(LIB_DIR)/$(LIB) $(NAME)
 
 debug: CFLAGS += -g3
-debug: clean all
+debug: re
 
 $(LIB_DIR)/$(LIB):
 	@make $(_MAKEFLAGS)

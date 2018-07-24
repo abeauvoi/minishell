@@ -6,10 +6,11 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/18 00:37:39 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/07/24 00:34:38 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/07/25 00:07:55 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include "minishell.h"
 
 /*
@@ -77,6 +78,7 @@ int			builtin_cd(t_env **env, char **args)
 			print_error(g_errno);
 			return (-1);
 		}
+		printf("[curpath:%s]\n", curpath);
 		i = chdir(curpath);
 		if (no_symlinks && *args && !print_pwd)
 			free(curpath);

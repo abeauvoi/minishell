@@ -6,7 +6,7 @@
 /*   By: jolabour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/12 01:23:26 by jolabour          #+#    #+#             */
-/*   Updated: 2018/07/23 06:24:29 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/07/25 00:07:55 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ static int		replace_dollars(char **arg, char *p, t_env *env)
 			print_error_and_exit(_ENOMEM);
 		if (p[1] == '$')
 		{
-			if (!(tmp3 = ft_strjoin(tmp2, data = ft_itoa((int)getpid)))
+			if (!(tmp3 = ft_strjoin(tmp2, data = ft_itoa_base((int)getpid, 10)))
 					|| !data)
 				print_error_and_exit(_ENOMEM);
 			ft_strdel(&data);
@@ -143,7 +143,7 @@ int		get_expansions(char **args, t_env *env)
 {
 	while (*(++args) != NULL)
 	{
-		if (*args[0] == '~' && get_tilde(args, env) == 0)
+		if ((*args)[0] == '~' && get_tilde(args, env) == 0)
 			return (0);
 		if (get_dollars(args, env) == 0)
 			return (0);

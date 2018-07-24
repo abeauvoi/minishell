@@ -3,27 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolabour <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/04 04:08:14 by jolabour          #+#    #+#             */
-/*   Updated: 2018/07/10 00:12:34 by jolabour         ###   ########.fr       */
+/*   Created: 2017/05/08 19:18:22 by abeauvoi          #+#    #+#             */
+/*   Updated: 2018/01/12 10:25:43 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
-# include "libft.h"
-# include <fcntl.h>
-# define BUFF_SIZE 8
+# ifdef BUFF_SIZE
+#  undef BUFF_SIZE
+# endif
+# define BUFF_SIZE 512
 
-typedef struct		s_gnl
+# define DELIM '\n'
+
+typedef struct s_hist	t_hist;
+
+typedef struct s_file	t_file;
+
+struct		s_file
 {
-	char			*str;
-	int				fd;
-	struct s_gnl	*next;
-}					t_gnl;
+	char	*saved;
+	size_t	saved_len;
+	int		fd;
+	t_file	*next;
+};
 
-int					get_next_line(const int fd, char **line);
+struct		s_hist
+{
+	t_file	*files;
+};
+
+int			get_next_line(const int fd, char **line);
 
 #endif
