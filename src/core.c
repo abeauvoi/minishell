@@ -69,9 +69,12 @@ void	process(t_minishell *data, t_env **list)
 
 	i = 0;
 	print_prompt(*list);
-	if (get_next_line(0, &line) <= 0)
-		exec_builtin(data, 5, list);
-	if (!(data->arg = ft_strsplit(line, ' ')))
+	if ((i = get_next_line(0, &line)) <= 0)
+	{
+		if (i == -1 && line == NULL)
+			print_error_and_exit(_ENOMEM);
+	}
+	if (!(data->arg = ft_strsplitset(line, " \t")))
 		print_error_and_exit(_ENOMEM);
 	free(line);
 	if (!data->arg[0])
@@ -87,7 +90,14 @@ void	process(t_minishell *data, t_env **list)
 		if ((data->valide_path = check_access(data)) == NULL)
 		{
 			print_error_first(_ENOCMD);
-			ft_putendl(data->arg[0]);
+			ft_putendl_fd(data->arg[0], 2);
+			return ;
+		}
+		if (access(data->valide_path, X_OK))
+		{
+			print_error_first(_ENOX);
+			ft_putendl_fd(data->arg[0], 2);
+			ft_strdel(&data->valide_path);
 			return ;
 		}
 		if (get_expansions(data->arg, *list) == 0)

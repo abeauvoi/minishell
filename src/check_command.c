@@ -22,12 +22,20 @@ char	*check_access(t_minishell *data)
 	char	*tmp2;
 
 	i = 0;
+	if (access(data->arg[0], F_OK) == 0)
+	{
+		if (!(tmp2 = ft_strdup(data->arg[0])))
+			print_error_and_exit(_ENOMEM);
+		return (tmp2);
+	}
 	if (data->bin_dirs)
 	{
 		while (data->bin_dirs[i])
 		{
-			tmp = ft_strjoin(data->bin_dirs[i], "/");
-			tmp2 = ft_strjoin(tmp, data->arg[0]);
+			if (!(tmp = ft_strjoin(data->bin_dirs[i], "/")))
+				print_error_and_exit(_ENOMEM);
+			if (!(tmp2 = ft_strjoin(tmp, data->arg[0])))
+				print_error_and_exit(_ENOMEM);
 			ft_strdel(&tmp);
 			if (access(tmp2, F_OK) == 0)
 				return (tmp2);
