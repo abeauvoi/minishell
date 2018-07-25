@@ -17,8 +17,6 @@ int		main(int argc, char **argv, char **env)
 	ft_putstr_fd("\033[H\033[2J", 1);
 	if (!(env[0]))
 		print_error(_ENOENV);
-	//init(&g_mini.copy_term);
-	//sigtest();
 	while (42)
 	{
 		init_env(&data, list);

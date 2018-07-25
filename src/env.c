@@ -10,6 +10,7 @@ void	init_builtin_tab(t_minishell *data)
 	data->builtin[3] = "unsetenv";
 	data->builtin[4] = "setenv";
 	data->builtin[5] = "exit";
+	data->builtin[6] = NULL;
 }
 
 char	*ft_getenv(t_env *list, const char *name, size_t len)

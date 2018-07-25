@@ -6,7 +6,7 @@
 #    By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/17 15:44:28 by abeauvoi          #+#    #+#              #
-#    Updated: 2018/07/24 23:31:44 by abeauvoi         ###   ########.fr        #
+#    Updated: 2018/07/25 05:18:46 by abeauvoi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,7 @@ _MAKEFLAGS	= -j$(echo $(NUMCORES)+1| bc) -l$(NUMCORES) -C $(LIB_DIR)
 
 all: $(LIB_DIR)/$(LIB) $(NAME)
 
-debug: CFLAGS += -g3
+debug: CFLAGS += -g3 -fsanitize=address
 debug: re
 
 $(LIB_DIR)/$(LIB):
@@ -57,7 +57,7 @@ $(LIB_DIR)/$(LIB):
 
 $(NAME): $(LIB_DIR)/$(LIB) $(OBJS)
 	@$(LINK)
-	@echo "completed compilation \033[1;32m√"
+	@echo "completed compilation \033[1;32m√\033[0m"
 
 $(OBJS_DIR)/%.o: %.c
 	@mkdir -p $(OBJS_DIR)

@@ -6,7 +6,7 @@
 #    By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/11 18:23:33 by abeauvoi          #+#    #+#              #
-#    Updated: 2018/07/25 00:05:33 by abeauvoi         ###   ########.fr        #
+#    Updated: 2018/07/25 05:19:04 by abeauvoi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,7 @@ SRCS 		= ft_abs.c ft_atoi.c ft_atoi_skip.c \
 		  hex_spec.c integer_spec.c non_printable_spec.c octal_spec.c \
 		  parse_one_spec.c percent_spec.c pointer_spec.c print_null.c \
 		  safe_ft_strncpy.c size_mod.c string_spec.c unknown_form.c \
-		  unsigned_spec.c utils.c ft_numstrlen.c
+		  unsigned_spec.c utils.c ft_numstrlen.c ft_strsplitset.c
 
 #
 # Build
@@ -71,7 +71,7 @@ debug: CFLAGS += -fsanitize=address -g3
 debug: re
 
 $(NAME): $(OBJS)
-	@$(BUILD_LIB)
+	@$(AR) rc $@ $^
 	@ranlib $@
 
 $(OBJ_DIR)/%.o: %.c

@@ -6,7 +6,7 @@
 /*   By: jolabour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/23 03:27:39 by jolabour          #+#    #+#             */
-/*   Updated: 2018/07/23 08:38:05 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/07/25 01:25:15 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ typedef struct		s_env
 
 typedef struct		s_minishell
 {
+	char			input[256];
 	char			**bin_dirs;
 	char			*pwd;
 	char			*dir;

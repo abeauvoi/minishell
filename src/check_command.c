@@ -1,5 +1,6 @@
 #include "minishell.h"
 
+#include <stdio.h>
 int		check_builtin(t_minishell *data)
 {
 	int		i;

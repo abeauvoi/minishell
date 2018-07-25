@@ -69,12 +69,11 @@ void	process(t_minishell *data, t_env **list)
 
 	i = 0;
 	print_prompt(*list);
-	while (get_next_line(1, &line) != 2);
+	if (get_next_line(0, &line) <= 0)
+		exec_builtin(data, 5, list);
 	if (!(data->arg = ft_strsplit(line, ' ')))
 		print_error_and_exit(_ENOMEM);
-	for (int j = 0; data->arg[j]; ++j)
-		printf("[data->arg[%d]:%s]\n", j, data->arg[j]);
-	ft_strdel(&line);
+	free(line);
 	if (!data->arg[0])
 		return ;
 	if ((i = check_builtin(data)) >= 0)

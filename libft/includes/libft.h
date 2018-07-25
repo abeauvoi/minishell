@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/11 18:54:46 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/05/23 06:57:08 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/07/25 04:52:04 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,7 @@ char				*ft_strnew(size_t size);
 char				*ft_strnstr(const char *hstk, const char *ndl, size_t len);
 char				*ft_strrchr(const char *s, int c);
 char				**ft_strsplit(char const *s, char c);
+char				**ft_strsplitset(char const *s, char const *delims);
 char				*ft_strstr(const char *haystack, const char *needle);
 char				*ft_strsub(char const *s, unsigned int start, size_t len);
 char				*ft_strtrim(char const *s);

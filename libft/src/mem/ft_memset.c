@@ -6,32 +6,35 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/11 18:43:39 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/05/23 07:30:25 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/07/25 05:03:43 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft_macros.h"
 #include "libft_types.h"
 
-static inline void	ft_memset_fast(t_u8 *dst, unsigned long buffer,
+static inline t_u8	*ft_memset_fast(t_u8 *dst, unsigned long buffer,
 		size_t n)
 {
-	t_u64	*lptr;
-
-	while (n >= BIG_BLOCK_SIZE)
+	while (n >= LITTLE_BLOCK_SIZE * 4)
 	{
-		lptr = (t_u64*)dst;
-		lptr[0] = buffer;
-		lptr[1] = buffer;
-		lptr[2] = buffer;
-		lptr[3] = buffer;
-		dst += BIG_BLOCK_SIZE;
+		*((t_u64*)dst) = buffer;
+		dst += LITTLE_BLOCK_SIZE;
+		*((t_u64*)dst) = buffer;
+		dst += LITTLE_BLOCK_SIZE;
+		*((t_u64*)dst) = buffer;
+		dst += LITTLE_BLOCK_SIZE;
+		*((t_u64*)dst) = buffer;
+		dst += LITTLE_BLOCK_SIZE;
+		n -= LITTLE_BLOCK_SIZE * 4;
 	}
 	while (n >= LITTLE_BLOCK_SIZE)
 	{
 		*((t_u64*)dst) = buffer;
+		dst += LITTLE_BLOCK_SIZE;
 		n -= LITTLE_BLOCK_SIZE;
 	}
+	return (dst);
 }
 
 void				*ft_memset(void *dst0, int c, size_t n)
@@ -56,7 +59,7 @@ void				*ft_memset(void *dst0, int c, size_t n)
 		buffer |= (buffer << 8);
 		buffer |= (buffer << 16);
 		buffer |= (buffer << 32);
-		ft_memset_fast(dst, buffer, n);
+		dst = ft_memset_fast(dst, buffer, n);
 		n &= (LITTLE_BLOCK_SIZE - 1);
 	}
 	while (n-- > 0)

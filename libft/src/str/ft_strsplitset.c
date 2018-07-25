@@ -1,36 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strsplit.c                                      :+:      :+:    :+:   */
+/*   ft_strsplitset.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/17 15:46:59 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/07/25 04:31:34 by abeauvoi         ###   ########.fr       */
+/*   Created: 2018/07/25 04:30:58 by abeauvoi          #+#    #+#             */
+/*   Updated: 2018/07/25 05:15:26 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include <stdlib.h>
+#include "libft.h"
 
-static size_t	ft_word_len(const char *s, char c)
+static int		ft_word_len(const char *s, char const *delims)
 {
-	size_t		i;
+	const char	*start;
 
-	i = 0;
-	while (s[i] && s[i] != c)
-		++i;
-	return (i);
+	start = s;
+	while (!ft_strchr(delims, *s))
+		++s;
+	return (s - start);
 }
 
-static	size_t	ft_word_count(const char *s, char c)
+static int		ft_word_count(const char *s, char const *delims)
 {
-	size_t		words;
+	int		words;
 
 	words = 0;
 	while (*s)
 	{
-		if (*s != c && (s[1] == c || s[1] == 0))
+		if (!ft_strchr(delims, *s) && (ft_strchr(delims, s[1]) || s[1] == 0))
 			++words;
 		++s;
 	}
@@ -44,30 +44,30 @@ static void		free_split(char **tab, int last)
 	free(tab);
 }
 
-char			**ft_strsplit(char const *s, char c)
+char			**ft_strsplitset(char const *s, char const *delims)
 {
 	char		**split;
-	size_t		i;
-	size_t		j;
-	size_t		words;
+	char const	*start;
+	int			i;
+	int			words;
 
 	if (!s || !(split = (char **)malloc(sizeof(*split)
-					* ((words = ft_word_count(s, c)) + 1))))
+					* ((words = ft_word_count(s, delims)) + 1))))
 		return (NULL);
+	start = s;
 	split[words] = NULL;
 	i = 0;
-	j = 0;
-	while (j < words)
+	while (i < words)
 	{
-		while (s[i] && s[i] == c)
-			++i;
-		if (!(split[j++] = ft_strsub(s, i, ft_word_len(s + i, c))))
+		while (ft_strchr(delims, *s))
+			++s;
+		if (!(split[i++] = ft_strsub(start, s - start, ft_word_len(s, delims))))
 		{
-			free_split(split, j);
+			free_split(split, i);
 			return (NULL);
 		}
-		while (s[i] && s[i] != c)
-			++i;
+		while (!ft_strchr(delims, *s))
+			++s;
 	}
 	return (split);
 }

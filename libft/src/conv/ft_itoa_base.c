@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/22 17:57:31 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/07/25 00:07:41 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/01/12 06:45:31 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,7 @@ char		*ft_itoa_base(int64_t n, unsigned int base)
 	if (base < 2 || base > 16)
 		return (NULL);
 	uval = (uint64_t)n;
-	if (!(buffer = (char *)malloc(65)))
-		return (NULL);
+	buffer = (char *)malloc(65);
 	if (n < 0 && base == 10)
 	{
 		*buffer++ = '-';
