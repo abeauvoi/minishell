@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "minishell.h"
 
 void	free_arg(char ***arg)
@@ -75,7 +76,7 @@ void	process(t_minishell *data, t_env **list)
 	}
 	if (!(data->arg = ft_strsplitset(line, " \t")))
 		print_error_and_exit(_ENOMEM);
-	ft_strdel(&line);
+	free(line);
 	if (!data->arg[0])
 		return ;
 	if ((i = check_builtin(data)) >= 0)
