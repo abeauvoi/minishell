@@ -1,0 +1,1111 @@
+[
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-Iincludes", 
+            "-o", 
+            "ft_strnew.o", 
+            "ft_strnew.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell/libft", 
+        "file": "ft_strnew.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-Iincludes", 
+            "-o", 
+            "get_next_line.o", 
+            "get_next_line.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell/libft", 
+        "file": "get_next_line.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-Iincludes", 
+            "-o", 
+            "ft_putstr_fd.o", 
+            "ft_putstr_fd.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell/libft", 
+        "file": "ft_putstr_fd.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-Iincludes", 
+            "-o", 
+            "ft_striter.o", 
+            "ft_striter.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell/libft", 
+        "file": "ft_striter.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-Iincludes", 
+            "-o", 
+            "ft_strlcat.o", 
+            "ft_strlcat.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell/libft", 
+        "file": "ft_strlcat.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-Iincludes", 
+            "-o", 
+            "ft_strmapi.o", 
+            "ft_strmapi.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell/libft", 
+        "file": "ft_strmapi.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-I./includes", 
+            "-Ilibft/includes", 
+            "-o", 
+            "obj/check_command.o", 
+            "src/check_command.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell", 
+        "file": "src/check_command.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-Iincludes", 
+            "-o", 
+            "ft_putchar_fd.o", 
+            "ft_putchar_fd.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell/libft", 
+        "file": "ft_putchar_fd.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-Iincludes", 
+            "-o", 
+            "ft_putendl_fd.o", 
+            "ft_putendl_fd.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell/libft", 
+        "file": "ft_putendl_fd.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-Iincludes", 
+            "-o", 
+            "ft_strchr.o", 
+            "ft_strchr.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell/libft", 
+        "file": "ft_strchr.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-I./includes", 
+            "-Ilibft/includes", 
+            "-o", 
+            "obj/errno.o", 
+            "src/errno.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell", 
+        "file": "src/errno.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-I./includes", 
+            "-Ilibft/includes", 
+            "-o", 
+            "obj/list.o", 
+            "src/list.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell", 
+        "file": "src/list.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-I./includes", 
+            "-Ilibft/includes", 
+            "-o", 
+            "obj/env.o", 
+            "src/env.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell", 
+        "file": "src/env.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-Iincludes", 
+            "-o", 
+            "ft_strsub.o", 
+            "ft_strsub.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell/libft", 
+        "file": "ft_strsub.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-Iincludes", 
+            "-o", 
+            "ft_putchar.o", 
+            "ft_putchar.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell/libft", 
+        "file": "ft_putchar.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-I./includes", 
+            "-Ilibft/includes", 
+            "-o", 
+            "obj/exec_builtin.o", 
+            "src/exec_builtin.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell", 
+        "file": "src/exec_builtin.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-Iincludes", 
+            "-o", 
+            "ft_lstiter.o", 
+            "ft_lstiter.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell/libft", 
+        "file": "ft_lstiter.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-I./includes", 
+            "-Ilibft/includes", 
+            "-o", 
+            "obj/expansions.o", 
+            "src/expansions.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell", 
+        "file": "src/expansions.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-Iincludes", 
+            "-o", 
+            "ft_strdel.o", 
+            "ft_strdel.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell/libft", 
+        "file": "ft_strdel.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-Iincludes", 
+            "-o", 
+            "ft_lstmap.o", 
+            "ft_lstmap.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell/libft", 
+        "file": "ft_lstmap.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-Iincludes", 
+            "-o", 
+            "ft_isalpha.o", 
+            "ft_isalpha.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell/libft", 
+        "file": "ft_isalpha.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-Iincludes", 
+            "-o", 
+            "ft_strncmp.o", 
+            "ft_strncmp.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell/libft", 
+        "file": "ft_strncmp.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-Iincludes", 
+            "-o", 
+            "ft_memalloc.o", 
+            "ft_memalloc.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell/libft", 
+        "file": "ft_memalloc.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-Iincludes", 
+            "-o", 
+            "ft_strtrim.o", 
+            "ft_strtrim.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell/libft", 
+        "file": "ft_strtrim.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-I./includes", 
+            "-Ilibft/includes", 
+            "-o", 
+            "obj/list2.o", 
+            "src/list2.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell", 
+        "file": "src/list2.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-Iincludes", 
+            "-o", 
+            "ft_striteri.o", 
+            "ft_striteri.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell/libft", 
+        "file": "ft_striteri.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-Iincludes", 
+            "-o", 
+            "ft_isdigit.o", 
+            "ft_isdigit.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell/libft", 
+        "file": "ft_isdigit.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-Iincludes", 
+            "-o", 
+            "ft_strnstr.o", 
+            "ft_strnstr.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell/libft", 
+        "file": "ft_strnstr.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-I./includes", 
+            "-Ilibft/includes", 
+            "-o", 
+            "obj/main.o", 
+            "src/main.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell", 
+        "file": "src/main.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-Iincludes", 
+            "-o", 
+            "ft_lstdel.o", 
+            "ft_lstdel.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell/libft", 
+        "file": "ft_lstdel.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-I./includes", 
+            "-Ilibft/includes", 
+            "-o", 
+            "obj/canonicalize2.o", 
+            "src/canonicalize2.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell", 
+        "file": "src/canonicalize2.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-Iincludes", 
+            "-o", 
+            "ft_memset.o", 
+            "ft_memset.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell/libft", 
+        "file": "ft_memset.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-I./includes", 
+            "-Ilibft/includes", 
+            "-o", 
+            "obj/signals.o", 
+            "src/signals.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell", 
+        "file": "src/signals.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-Iincludes", 
+            "-o", 
+            "ft_strclr.o", 
+            "ft_strclr.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell/libft", 
+        "file": "ft_strclr.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-Iincludes", 
+            "-o", 
+            "ft_lstnew.o", 
+            "ft_lstnew.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell/libft", 
+        "file": "ft_lstnew.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-Iincludes", 
+            "-o", 
+            "ft_strsplit.o", 
+            "ft_strsplit.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell/libft", 
+        "file": "ft_strsplit.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-Iincludes", 
+            "-o", 
+            "ft_strcmp.o", 
+            "ft_strcmp.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell/libft", 
+        "file": "ft_strcmp.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-Iincludes", 
+            "-o", 
+            "ft_strlen.o", 
+            "ft_strlen.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell/libft", 
+        "file": "ft_strlen.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-I./includes", 
+            "-Ilibft/includes", 
+            "-o", 
+            "obj/builtin.o", 
+            "src/builtin.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell", 
+        "file": "src/builtin.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-Iincludes", 
+            "-o", 
+            "ft_memmove.o", 
+            "ft_memmove.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell/libft", 
+        "file": "ft_memmove.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-Iincludes", 
+            "-o", 
+            "ft_tolower.o", 
+            "ft_tolower.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell/libft", 
+        "file": "ft_tolower.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-Iincludes", 
+            "-o", 
+            "ft_strmap.o", 
+            "ft_strmap.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell/libft", 
+        "file": "ft_strmap.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-Iincludes", 
+            "-o", 
+            "ft_strjoin.o", 
+            "ft_strjoin.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell/libft", 
+        "file": "ft_strjoin.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-Iincludes", 
+            "-o", 
+            "ft_memcmp.o", 
+            "ft_memcmp.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell/libft", 
+        "file": "ft_memcmp.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-Iincludes", 
+            "-o", 
+            "ft_strnequ.o", 
+            "ft_strnequ.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell/libft", 
+        "file": "ft_strnequ.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-Iincludes", 
+            "-o", 
+            "ft_strcat.o", 
+            "ft_strcat.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell/libft", 
+        "file": "ft_strcat.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-Iincludes", 
+            "-o", 
+            "ft_lstadd.o", 
+            "ft_lstadd.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell/libft", 
+        "file": "ft_lstadd.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-Iincludes", 
+            "-o", 
+            "ft_isprint.o", 
+            "ft_isprint.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell/libft", 
+        "file": "ft_isprint.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-Iincludes", 
+            "-o", 
+            "ft_strequ.o", 
+            "ft_strequ.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell/libft", 
+        "file": "ft_strequ.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-Iincludes", 
+            "-o", 
+            "ft_strncpy.o", 
+            "ft_strncpy.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell/libft", 
+        "file": "ft_strncpy.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-Iincludes", 
+            "-o", 
+            "ft_memcpy.o", 
+            "ft_memcpy.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell/libft", 
+        "file": "ft_memcpy.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-Iincludes", 
+            "-o", 
+            "ft_memdel.o", 
+            "ft_memdel.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell/libft", 
+        "file": "ft_memdel.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-Iincludes", 
+            "-o", 
+            "ft_putnbr.o", 
+            "ft_putnbr.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell/libft", 
+        "file": "ft_putnbr.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-Iincludes", 
+            "-o", 
+            "ft_putstr.o", 
+            "ft_putstr.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell/libft", 
+        "file": "ft_putstr.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-Iincludes", 
+            "-o", 
+            "ft_lstdelone.o", 
+            "ft_lstdelone.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell/libft", 
+        "file": "ft_lstdelone.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-Iincludes", 
+            "-o", 
+            "ft_memccpy.o", 
+            "ft_memccpy.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell/libft", 
+        "file": "ft_memccpy.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-I./includes", 
+            "-Ilibft/includes", 
+            "-o", 
+            "obj/canonicalize.o", 
+            "src/canonicalize.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell", 
+        "file": "src/canonicalize.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-Iincludes", 
+            "-o", 
+            "ft_strncat.o", 
+            "ft_strncat.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell/libft", 
+        "file": "ft_strncat.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-Iincludes", 
+            "-o", 
+            "ft_strdup.o", 
+            "ft_strdup.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell/libft", 
+        "file": "ft_strdup.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-Iincludes", 
+            "-o", 
+            "ft_itoa.o", 
+            "ft_itoa.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell/libft", 
+        "file": "ft_itoa.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-Iincludes", 
+            "-o", 
+            "ft_toupper.o", 
+            "ft_toupper.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell/libft", 
+        "file": "ft_toupper.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-Iincludes", 
+            "-o", 
+            "ft_strstr.o", 
+            "ft_strstr.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell/libft", 
+        "file": "ft_strstr.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-Iincludes", 
+            "-o", 
+            "ft_strrchr.o", 
+            "ft_strrchr.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell/libft", 
+        "file": "ft_strrchr.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-Iincludes", 
+            "-o", 
+            "ft_bzero.o", 
+            "ft_bzero.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell/libft", 
+        "file": "ft_bzero.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-I./includes", 
+            "-Ilibft/includes", 
+            "-o", 
+            "obj/core.o", 
+            "src/core.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell", 
+        "file": "src/core.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-I./includes", 
+            "-Ilibft/includes", 
+            "-o", 
+            "obj/builtin_cd.o", 
+            "src/builtin_cd.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell", 
+        "file": "src/builtin_cd.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-Iincludes", 
+            "-o", 
+            "ft_strcpy.o", 
+            "ft_strcpy.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell/libft", 
+        "file": "ft_strcpy.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-Iincludes", 
+            "-o", 
+            "ft_memchr.o", 
+            "ft_memchr.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell/libft", 
+        "file": "ft_memchr.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-Iincludes", 
+            "-o", 
+            "ft_isalnum.o", 
+            "ft_isalnum.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell/libft", 
+        "file": "ft_isalnum.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-Iincludes", 
+            "-o", 
+            "ft_atoi.o", 
+            "ft_atoi.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell/libft", 
+        "file": "ft_atoi.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-Iincludes", 
+            "-o", 
+            "ft_putnbr_fd.o", 
+            "ft_putnbr_fd.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell/libft", 
+        "file": "ft_putnbr_fd.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-Iincludes", 
+            "-o", 
+            "ft_putendl.o", 
+            "ft_putendl.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell/libft", 
+        "file": "ft_putendl.c"
+    }, 
+    {
+        "arguments": [
+            "cc", 
+            "-c", 
+            "-Wall", 
+            "-Werror", 
+            "-Wextra", 
+            "-Iincludes", 
+            "-o", 
+            "ft_isascii.o", 
+            "ft_isascii.c"
+        ], 
+        "directory": "/Users/abeauvoi/Documents/minishell/libft", 
+        "file": "ft_isascii.c"
+    }
+]

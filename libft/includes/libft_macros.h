@@ -6,7 +6,7 @@
 /*   By: abeauvoi <abeauvoi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 05:06:59 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/07/25 05:22:22 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/05/23 06:16:43 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,8 @@
 # define IS_DIGIT(x) (TO_DIGIT(x) <= 9)
 # define IS_ALPHA(x) (('A' <= (x) && (x) <= 'Z') || ('a' <= (x) && (x) <= 'z'))
 # define IS_ALNUM(x) (IS_DIGIT(x) || IS_ALPHA(x))
-# ifndef MAX
-#  define MAX(x, y) (x > y ? x : y)
-# endif
-# ifndef MIN
-#  define MIN(x, y) (x < y ? x : y)
-# endif
+# define MAX(x, y) (x > y ? x : y)
+# define MIN(x, y) (x < y ? x : y)
 
 /*
 ** https://stackoverflow.com/a/13546502
