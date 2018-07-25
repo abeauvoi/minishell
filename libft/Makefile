@@ -6,7 +6,7 @@
 #    By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/11 18:23:33 by abeauvoi          #+#    #+#              #
-#    Updated: 2018/07/25 05:19:04 by abeauvoi         ###   ########.fr        #
+#    Updated: 2018/07/25 05:26:38 by abeauvoi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,14 +72,14 @@ debug: re
 
 $(NAME): $(OBJS)
 	@$(AR) rc $@ $^
-	@ranlib $@
+	@ranlib $@ && echo "Done \033[1;32m✓\033[0m"
 
 $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(OBJ_DIR)
-	$(COMP)
+	@$(COMP)
 
 clean:
-	$(RM) $(OBJS)
+	@$(RM) $(OBJS)
 	@rmdir $(OBJ_DIR) 2> /dev/null || true
 
 fclean: clean
