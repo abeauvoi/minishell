@@ -6,7 +6,7 @@
 /*   By: jolabour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/23 03:27:39 by jolabour          #+#    #+#             */
-/*   Updated: 2018/07/25 05:23:26 by jolabour         ###   ########.fr       */
+/*   Updated: 2018/07/25 07:39:39 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,13 +161,13 @@ void				builtin_unsetenv(t_env **env, char *arg, size_t len);
 
 typedef struct		s_realpath
 {
-	char	*rpath;
-	char	*rpath_limit;
-	char	*dest;
-	char	*start;
-	char	*end;
-	char	extra_buf[PATH_MAX];
-	int		num_links;
+	char		*rpath;
+	char		*rpath_limit;
+	char		*dest;
+	const char	*start;
+	const char	*end;
+	char		extra_buf[PATH_MAX];
+	int			num_links;
 }					t_realpath;
 
 char				*realloc_rpath(t_realpath *vars);

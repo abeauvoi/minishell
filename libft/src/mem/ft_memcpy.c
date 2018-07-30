@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/11 19:34:45 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/05/23 05:54:25 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/07/25 07:05:06 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,5 @@ void					*ft_memcpy(void *dst0, const void *src0, size_t len)
 		len = ft_memcpy_fast(&dst, &src, len);
 	while (len-- > 0)
 		*dst++ = *src++;
-	return (dst);
+	return (dst0);
 }

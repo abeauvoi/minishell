@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/23 02:40:03 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/07/25 05:25:11 by jolabour         ###   ########.fr       */
+/*   Updated: 2018/07/25 07:39:22 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static inline char	*substitute_path_component(const char **name,
 
 static inline char	*internal_realpath(const char *name, t_realpath *vars)
 {
-	vars->start = (char *)name;
+	vars->start = (const char *)name;
 	while (*vars->start)
 	{
 		while (*vars->start == '/')
@@ -122,7 +122,10 @@ char				*ft_realpath(const char *name)
 		return (NULL);
 	}
 	if (!(vars.rpath = (char *)malloc(PATH_MAX)))
+	{
+		ft_set_errno(_ENOMEM);
 		return (NULL);
+	}
 	vars.rpath_limit = vars.rpath + PATH_MAX;
 	if (name[0] != '/')
 	{
@@ -135,7 +138,5 @@ char				*ft_realpath(const char *name)
 		vars.rpath[0] = '/';
 		vars.dest = vars.rpath + 1;
 	}
-	*vars.dest = 0;
-	ft_putendl(vars.rpath);
 	return (internal_realpath(name, &vars));
 }

@@ -6,7 +6,7 @@
 #    By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/17 15:44:28 by abeauvoi          #+#    #+#              #
-#    Updated: 2018/07/25 05:18:46 by abeauvoi         ###   ########.fr        #
+#    Updated: 2018/07/25 06:56:51 by abeauvoi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,22 +42,25 @@ COMP		= $(CC) $(CFLAGS) -o $@ -c $<
 LINK		= $(CC) $(CFLAGS) $(LFLAGS) -o $@ $(filter-out $(LIB_DIR)/$(LIB), $^)
 NUMCORES 	= $(sysctl -n hw.ncpu)
 _MAKEFLAGS	= -j$(echo $(NUMCORES)+1| bc) -l$(NUMCORES) -C $(LIB_DIR)
+MAKELIB 	= $(LIB_DIR)/$(LIB)
 
 #
 # Rules
 #
 
-all: $(LIB_DIR)/$(LIB) $(NAME)
+all: $(MAKELIB) $(NAME)
 
-debug: CFLAGS += -g3 -fsanitize=address
-debug: re
+debug: CFLAGS += -g3
+debug: fclean $(DBGMAKELIB) $(NAME)
 
-$(LIB_DIR)/$(LIB):
+$(DBGMAKELIB):
+	@make debug $(_MAKEFLAGS)
+
+$(MAKELIB):
 	@make $(_MAKEFLAGS)
 
 $(NAME): $(LIB_DIR)/$(LIB) $(OBJS)
-	@$(LINK)
-	@echo "completed compilation \033[1;32m√\033[0m"
+	@$(LINK) && echo "$(NAME) \033[1;32m√\033[0m"
 
 $(OBJS_DIR)/%.o: %.c
 	@mkdir -p $(OBJS_DIR)

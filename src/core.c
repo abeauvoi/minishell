@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "minishell.h"
+#include "ft_printf.h"
 
 void	free_arg(char ***arg)
 {
@@ -69,10 +70,12 @@ void	process(t_minishell *data, t_env **list)
 
 	i = 0;
 	print_prompt(*list);
+	line = NULL;
 	if ((i = get_next_line(0, &line)) <= 0)
 	{
 		if (i == -1 && line == NULL)
 			print_error_and_exit(_ENOMEM);
+		exit(EXIT_SUCCESS);
 	}
 	if (!(data->arg = ft_strsplitset(line, " \t")))
 		print_error_and_exit(_ENOMEM);

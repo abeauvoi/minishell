@@ -6,7 +6,7 @@
 #    By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/11 18:23:33 by abeauvoi          #+#    #+#              #
-#    Updated: 2018/07/25 04:49:43 by abeauvoi         ###   ########.fr        #
+#    Updated: 2018/07/25 06:40:58 by abeauvoi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,20 +67,19 @@ BUILD_LIB	= $(AR) rc $@ $^
 
 all: $(NAME)
 
-debug: CFLAGS += -fsanitize=address -g3
-debug: fclean
-debug: all
+debug: CFLAGS += -g3
+debug: re
 
 $(NAME): $(OBJS)
 	@$(AR) rc $@ $^
-	@ranlib $@
+	@ranlib $@ && echo "$(NAME) \033[1;32m✓\033[0m"
 
 $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(OBJ_DIR)
-	$(COMP)
+	@$(COMP)
 
 clean:
-	$(RM) $(OBJS)
+	@$(RM) $(OBJS)
 	@rmdir $(OBJ_DIR) 2> /dev/null || true
 
 fclean: clean

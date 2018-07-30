@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/07 17:16:14 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/05/23 07:36:20 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/07/25 06:03:06 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,10 @@ typedef enum				e_status
 enum
 {
 	COLOR_CODE_SIZE = 6,
+# ifdef COLORS
+#  undef COLORS
 	COLORS = 21,
+# endif
 	MAX_NDIGITS = 64,
 	BUF_SIZE = 1024
 }							e_limits;
@@ -236,7 +239,7 @@ void						copy_to_buf(t_ftpf_buf *buffer, const char ch);
 void						safe_ft_strncpy(t_ftpf_buf *buffer,
 		const char *src, ssize_t len);
 void						padding(t_ftpf_buf *buffer, int stat,
-		char pad_char);
+		char pad);
 char						*ft_strstrn(const char *big, const char *little,
 		size_t n);
 char						get_sign(intmax_t nb, t_ftpf_flag flags);

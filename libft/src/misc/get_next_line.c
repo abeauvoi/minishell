@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/19 17:39:12 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/04/12 01:53:16 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/07/25 07:04:31 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,6 @@
 #include <stdlib.h>
 #include "libft.h"
 #include "get_next_line.h"
-
-/*
-** This get_next_line returs the length of the line instead of one.
-*/
 
 static int			build_one_line(int fd, char *buf, t_file *file)
 {
@@ -87,7 +83,7 @@ static size_t		clear_history(t_hist *hist, t_file *file, size_t len_line,
 		free(file);
 		return (0);
 	}
-	return (len_line);
+	return (1);
 }
 
 static int			get_one_line(t_hist *hist, t_file *file, char **line,
