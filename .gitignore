@@ -2,4 +2,6 @@ minishell
 minishell.dSYM/
 compile_commands.json
 obj/
+libft/
+.gitignore
 auteur
