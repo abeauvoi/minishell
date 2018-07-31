@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   signals.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/07/31 05:18:08 by abeauvoi          #+#    #+#             */
+/*   Updated: 2018/07/31 05:30:50 by abeauvoi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <termios.h>
 #include "minishell.h"
 
 static void		sig_int(int sig)
 {
 	(void)sig;
 	tcsetattr(0, 0, &g_mini.copy_term);
-//	printf("\nsignal catched !\n");
 	exit(1);
 }
 
@@ -42,15 +54,8 @@ int			init(struct termios *copy_term)
 	char			*name_term;
 	struct termios	term;
 
-	if ((name_term = getenv("TERM")) == NULL)
-	{
-		ft_putstr_fd("Hey, bring back env bro\n", 2);
-		return (-1);
-	}
-/*	if (tgetent(NULL, name_term) == -1)
-		return (-1);
-*/	if (tcgetattr(0, &term) == -1)
-		return (-1);
+	if (!(name_term = getenv("TERM")) || tcgetattr(0, &term) == -1)
+		return (ft_set_errno(_ENOTTY));
 	*copy_term = term;
 	if (tcsetattr(0, TCSADRAIN, &term) == -1)
 		return (-1);

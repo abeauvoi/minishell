@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   env.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/07/30 21:22:04 by abeauvoi          #+#    #+#             */
+/*   Updated: 2018/07/31 07:43:51 by abeauvoi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	init_builtin_tab(t_minishell *data)
 {
 	if (!(data->builtin = malloc(sizeof(char *) * 7)))
-		print_error_and_exit(_ENOMEM);
+		print_error(_ENOMEM);
 	data->builtin[0] = "echo";
 	data->builtin[1] = "cd";
 	data->builtin[2] = "env";
@@ -22,14 +34,14 @@ char	*ft_getenv(t_env *list, const char *name, size_t len)
 		return (str);
 	while (list)
 	{
-		if (ft_strncmp(list->str, name, len) == 0)
+		if (ft_strncmp(list->str, name, len) == 0 && list->str[len] != '\0')
 		{
-			str = list->str;
+			str = list->str + len;
 			break ;
 		}
 		list = list->next;
 	}
-	return (str ? str + len : str);
+	return (str);
 }
 
 void	init_env(t_minishell *data, t_env *list)
@@ -41,13 +53,13 @@ void	init_env(t_minishell *data, t_env *list)
 	if (path)
 	{
 		if (!(data->bin_dirs = ft_strsplit(path, ':')))
-			print_error_and_exit(_ENOMEM);
+			print_error(_ENOMEM);
 	}
 	pwd = ft_getenv(list, "PWD=", sizeof("PWD=") - 1);
 	if (pwd)
 	{
 		if (!(data->pwd = ft_strdup(pwd)))
-			print_error_and_exit(_ENOMEM);
+			print_error(_ENOMEM);
 	}
 	list_to_tab(list, data);
 }

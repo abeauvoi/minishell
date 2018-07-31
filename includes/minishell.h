@@ -6,7 +6,7 @@
 /*   By: jolabour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/23 03:27:39 by jolabour          #+#    #+#             */
-/*   Updated: 2018/07/25 07:39:39 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/07/31 05:29:02 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 */
 
 /*
-** The value 0 cannot be used for errno values (you test if g_errno != 0)
+** g_errno default value is 0
 */
 
 typedef enum		e_errno_val
@@ -53,6 +53,9 @@ typedef enum		e_errno_val
 	_EINVAL,
 	_ENOENT,
 	_ENOX,
+	_ENOPWD,
+	_ENOOLDPWD,
+	_ENOTTY,
 	_ERRNO_VALUES
 }					t_errno;
 
@@ -94,9 +97,9 @@ void				sigtest(void);
 
 void				init_error_tab(void);
 void				print_error(int error_code);
-void				print_error_and_exit(int error_code);
 void				print_error_first(int error_code);
-int					ft_set_errno(int n);
+int					ft_set_errno(int err);
+void				*ft_set_errno2(int err);
 
 /*
 ** core

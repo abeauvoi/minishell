@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansions.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolabour <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/12 01:23:26 by jolabour          #+#    #+#             */
-/*   Updated: 2018/07/25 00:07:55 by abeauvoi         ###   ########.fr       */
+/*   Created: 2018/07/31 05:06:28 by abeauvoi          #+#    #+#             */
+/*   Updated: 2018/07/31 05:07:11 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,17 @@ static char		*remplace_tilde(char *arg, t_env *env, size_t arglen)
 		if (arglen == 1)
 		{
 			if (!(result = ft_strdup(data)))
-				print_error_and_exit(_ENOMEM);
+				print_error(_ENOMEM);
 		}
 		else if (data[ft_strlen(data) - 1] == '/')
 		{
 			if (!(result = ft_strjoin(data, arg + 2)))
-				print_error_and_exit(_ENOMEM);
+				print_error(_ENOMEM);
 		}
 		else
 		{
 			if (!(result = ft_strjoin(data, arg + 1)))
-				print_error_and_exit(_ENOMEM);
+				print_error(_ENOMEM);
 		}
 		free(arg);
 		return (result);
@@ -45,7 +45,7 @@ static char		*get_user(char *user)
 	char *tmp;
 
 	if (!(tmp = ft_strjoin("/Users/", user + 1)))
-		print_error_and_exit(_ENOMEM);
+		print_error(_ENOMEM);
 	ft_strdel(&user);
 	return (tmp);
 }
@@ -90,28 +90,28 @@ static int		replace_dollars(char **arg, char *p, t_env *env)
 	if ((data = ft_getenv(env, p + 1, (tmp - p) - 1)) != NULL || p[1] == '$')
 	{
 		if (!(tmp2 = ft_strsub(*arg, 0, (p - *arg))))
-			print_error_and_exit(_ENOMEM);
+			print_error(_ENOMEM);
 		if (p[1] == '$')
 		{
 			if (!(tmp3 = ft_strjoin(tmp2, data = ft_itoa_base((int)getpid, 10)))
 					|| !data)
-				print_error_and_exit(_ENOMEM);
+				print_error(_ENOMEM);
 			ft_strdel(&data);
 			ft_strdel(&tmp2);
 			if (!(tmp2 = ft_strdup(tmp + 1)))
-				print_error_and_exit(_ENOMEM);
+				print_error(_ENOMEM);
 		}
 		else
 		{
 			if (!(tmp3 = ft_strjoin(tmp2, data + 1)))
-				print_error_and_exit(_ENOMEM);
+				print_error(_ENOMEM);
 			ft_strdel(&tmp2);
 			if (!(tmp2 = ft_strdup(tmp)))
-				print_error_and_exit(_ENOMEM);
+				print_error(_ENOMEM);
 		}
 		free(*arg);
 		if (!(*arg = ft_strjoin(tmp3, tmp2)))
-			print_error_and_exit(_ENOMEM);
+			print_error(_ENOMEM);
 		ft_strdel(&tmp3);
 		ft_strdel(&tmp2);
 		return (1);

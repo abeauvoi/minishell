@@ -1,4 +1,15 @@
-#include <stdio.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/07/31 05:15:41 by abeauvoi          #+#    #+#             */
+/*   Updated: 2018/07/31 05:18:04 by abeauvoi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
 #include <sys/wait.h>
 #include <stdlib.h>
@@ -14,7 +25,7 @@ int		main(int argc, char **argv, char **env)
 	list = set_list(env);
 	init_builtin_tab(&data);
 	init_error_tab();
-	ft_putstr_fd("\033[H\033[2J", 1);
+	write(STDOUT_FILENO, "\033[H\033[2J", sizeof("\033[H\033[2J") - 1);
 	if (!(env[0]))
 		print_error(_ENOENV);
 	while (42)

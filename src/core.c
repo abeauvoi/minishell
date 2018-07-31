@@ -1,4 +1,15 @@
-#include <stdio.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   core.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/07/31 05:02:22 by abeauvoi          #+#    #+#             */
+/*   Updated: 2018/07/31 05:03:49 by abeauvoi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 #include "ft_printf.h"
 
@@ -74,11 +85,12 @@ void	process(t_minishell *data, t_env **list)
 	if ((i = get_next_line(0, &line)) <= 0)
 	{
 		if (i == -1 && line == NULL)
-			print_error_and_exit(_ENOMEM);
-		exit(EXIT_SUCCESS);
+			print_error(_ENOMEM);
+		else
+			exit(EXIT_SUCCESS);
 	}
 	if (!(data->arg = ft_strsplitset(line, " \t")))
-		print_error_and_exit(_ENOMEM);
+		print_error(_ENOMEM);
 	free(line);
 	if (!data->arg[0])
 		return ;

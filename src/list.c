@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jolabour <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/09 23:55:31 by jolabour          #+#    #+#             */
-/*   Updated: 2018/07/24 00:06:27 by abeauvoi         ###   ########.fr       */
+/*   Created: 2018/07/31 05:07:19 by abeauvoi          #+#    #+#             */
+/*   Updated: 2018/07/31 05:07:35 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ void		list_to_tab(t_env *env, t_minishell *data)
 	int		i;
 
 	if (!(data->copy_env = malloc(sizeof(char *) * (len_list(env) + 1))))
-		print_error_and_exit(_ENOMEM);
+		print_error(_ENOMEM);
 	i = 0;
 	while (env)
 	{
 		if (!(data->copy_env[i] = ft_strdup(env->str)))
-			print_error_and_exit(_ENOMEM);
+			print_error(_ENOMEM);
 		env = env->next;
 		i++;
 	}
@@ -78,7 +78,7 @@ t_env		*set_list(char **env)
 	while (env[i])
 	{
 		if (!(new = create_node(env[i])))
-			print_error_and_exit(_ENOMEM);
+			print_error(_ENOMEM);
 		lst_push(&start, new);
 		i++;
 	}

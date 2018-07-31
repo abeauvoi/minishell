@@ -6,7 +6,7 @@
 /*   By: jolabour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/08 05:13:12 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/07/23 04:05:12 by jolabour         ###   ########.fr       */
+/*   Updated: 2018/07/31 04:50:51 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void		builtin_echo(char **args, size_t total_length)
 	char	*tmp;
 
 	if (!(output = ft_strnew(total_length)))
-		print_error_and_exit(_ENOMEM);
+		print_error(_ENOMEM);
 	tmp = output;
 	while (*args)
 	{
@@ -75,15 +75,15 @@ void		builtin_setenv(t_env **env, char *name, char *content)
 	if (content)
 	{
 		if (!(tmp2 = ft_strjoin(name, "=")))
-			print_error_and_exit(_ENOMEM);
+			print_error(_ENOMEM);
 		if (!(tmp = ft_strjoin(tmp2, content)))
-			print_error_and_exit(_ENOMEM);
+			print_error(_ENOMEM);
 		ft_strdel(&tmp2);
 	}
 	else
 	{
 		if (!(tmp = ft_strjoin(name, "=")))
-			print_error_and_exit(_ENOMEM);
+			print_error(_ENOMEM);
 	}
 	ptr = *env;
 	while (ptr)
@@ -92,7 +92,7 @@ void		builtin_setenv(t_env **env, char *name, char *content)
 		{
 			free(ptr->str);
 			if (!(ptr->str = ft_strdup(tmp)))
-				print_error_and_exit(_ENOMEM);
+				print_error(_ENOMEM);
 			free(tmp);
 			return ;
 		}

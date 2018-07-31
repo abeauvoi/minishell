@@ -6,17 +6,24 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/23 02:43:02 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/07/25 03:19:58 by jolabour         ###   ########.fr       */
+/*   Updated: 2018/07/31 05:33:39 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		ft_set_errno(int n)
+int		ft_set_errno(int err)
 {
-	g_errno = n;
+	g_errno = err;
 	return (-1);
 }
+
+void	*ft_set_errno2(int err)
+{
+	g_errno = err;
+	return (NULL);
+}
+
  void	init_error_tab(void)
 {
 	g_errors[_ENOMEM - 1] = "Cannot allocate memory";
@@ -28,21 +35,30 @@ int		ft_set_errno(int n)
 	g_errors[_ENOVAR - 1] = ": Undefined variable.";
 	g_errors[_ENOCMD - 1] = "minishell: command not found: ";
 	g_errors[_ENOX - 1] = "minishell: permission denied: ";
+	g_errors[_ENOPWD - 1] = "PWD not set";
+	g_errors[_ENOOLDPWD - 1] = "OLDPWD not set";
+	g_errors[_ENOTTY - 1] = "Not a terminal, exiting";
 }
 
-void	print_error_and_exit(int error_code)
+void	print_error(int err)
 {
-	ft_putendl_fd(g_errors[error_code - 1], 2);
-	exit(EXIT_FAILURE);
-}
+	char		buf[256];
+	char		*ptr;
+	const char	*msg;
 
-void	print_error(int error_code)
-{
-	ft_putendl_fd(g_errors[error_code - 1], 2);
+	msg = g_errors[err - 1];
+	ft_strcpy(buf, "cd: ");
+	ft_strcpy(ptr = buf + 4, msg);
+	ptr += ft_strlen(msg);
+	*ptr++ = '\n';
+	*ptr = '\0';
+	write(STDERR_FILENO, buf, ptr - buf);
 	g_errno = 0;
+	if (err == _ENOMEM || err == _ENOTTY)
+		exit(EXIT_FAILURE);
 }
 
-void	print_error_first(int error_code)
+void	print_error_first(int err)
 {
-	ft_putstr_fd(g_errors[error_code - 1], 2);
+	ft_putstr_fd(g_errors[err - 1], 2);
 }

@@ -1,6 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_command.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/07/31 05:02:01 by abeauvoi          #+#    #+#             */
+/*   Updated: 2018/07/31 05:02:13 by abeauvoi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-#include <stdio.h>
 int		check_builtin(t_minishell *data)
 {
 	int		i;
@@ -25,7 +36,7 @@ char	*check_access(t_minishell *data)
 	if (access(data->arg[0], F_OK) == 0)
 	{
 		if (!(tmp2 = ft_strdup(data->arg[0])))
-			print_error_and_exit(_ENOMEM);
+			print_error(_ENOMEM);
 		return (tmp2);
 	}
 	if (data->bin_dirs)
@@ -33,9 +44,9 @@ char	*check_access(t_minishell *data)
 		while (data->bin_dirs[i])
 		{
 			if (!(tmp = ft_strjoin(data->bin_dirs[i], "/")))
-				print_error_and_exit(_ENOMEM);
+				print_error(_ENOMEM);
 			if (!(tmp2 = ft_strjoin(tmp, data->arg[0])))
-				print_error_and_exit(_ENOMEM);
+				print_error(_ENOMEM);
 			ft_strdel(&tmp);
 			if (access(tmp2, F_OK) == 0)
 				return (tmp2);

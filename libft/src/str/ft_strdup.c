@@ -6,12 +6,12 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 17:43:30 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/05/23 06:41:14 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/07/30 20:44:15 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include <stdlib.h>
+#include "libft.h"
 
 char		*ft_strdup(const char *s1)
 {
