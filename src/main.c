@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/31 05:15:41 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/07/31 05:18:04 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/08/02 18:25:50 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		main(int argc, char **argv, char **env)
 	init_error_tab();
 	write(STDOUT_FILENO, "\033[H\033[2J", sizeof("\033[H\033[2J") - 1);
 	if (!(env[0]))
-		print_error(_ENOENV);
+		print_error(_ENOENV, ERROR_HEADER_MINISH);
 	while (42)
 	{
 		init_env(&data, list);

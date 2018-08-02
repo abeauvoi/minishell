@@ -6,14 +6,13 @@
 /*   By: jolabour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/23 03:27:39 by jolabour          #+#    #+#             */
-/*   Updated: 2018/07/31 05:29:02 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/08/02 18:36:57 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include <stdio.h>
 # include <unistd.h>
 # include <sys/wait.h>
 # include <stdlib.h>
@@ -28,6 +27,10 @@
 # include "libft.h"
 
 # define BUILTIN_CD_USAGE "cd: usage: cd [-L|-P] [dir]"
+# define ERROR_HEADER_SETENV "setenv: "
+# define ERROR_HEADER_ECHO "echo: "
+# define ERROR_HEADER_CD "cd: "
+# define ERROR_HEADER_MINISH "minishell: "
 
 /*
 ** Sections : signals, core, expansions, env, check_command, list, exec_builtin,
@@ -56,10 +59,11 @@ typedef enum		e_errno_val
 	_ENOPWD,
 	_ENOOLDPWD,
 	_ENOTTY,
+	_ENOCDPATH,
 	_ERRNO_VALUES
 }					t_errno;
 
-static t_errno		g_errno;
+t_errno				g_errno;
 static const char	*g_errors[_ERRNO_VALUES];
 
 typedef struct		s_env
@@ -96,7 +100,7 @@ void				sigtest(void);
 */
 
 void				init_error_tab(void);
-void				print_error(int error_code);
+void				print_error(int error_code, char *header);
 void				print_error_first(int error_code);
 int					ft_set_errno(int err);
 void				*ft_set_errno2(int err);
@@ -145,6 +149,7 @@ void				lst_del(t_env **env, t_env *to_del, t_env *prev);
 /*
 ** exec_builtin
 */
+
 void				exec_builtin(t_minishell *data, int i, t_env **list);
 
 /*
@@ -167,6 +172,7 @@ typedef struct		s_realpath
 	char		*rpath;
 	char		*rpath_limit;
 	char		*dest;
+	char 		*resolved;
 	const char	*start;
 	const char	*end;
 	char		extra_buf[PATH_MAX];
@@ -174,6 +180,8 @@ typedef struct		s_realpath
 }					t_realpath;
 
 char				*realloc_rpath(t_realpath *vars);
-char				*ft_realpath(const char *name);
+char				*ft_realpath(const char *name,
+		char resolved_path[PATH_MAX]);
+char 				*free_rpath(t_realpath *vars);
 
 #endif

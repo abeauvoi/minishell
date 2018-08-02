@@ -6,7 +6,7 @@
 #    By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/17 15:44:28 by abeauvoi          #+#    #+#              #
-#    Updated: 2018/07/25 06:56:51 by abeauvoi         ###   ########.fr        #
+#    Updated: 2018/08/02 18:01:18 by abeauvoi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,9 @@ MAKELIB 	= $(LIB_DIR)/$(LIB)
 all: $(MAKELIB) $(NAME)
 
 debug: CFLAGS += -g3
-debug: fclean $(DBGMAKELIB) $(NAME)
+debug: fclean
+debug: $(DBGMAKELIB)
+debug: $(NAME)
 
 $(DBGMAKELIB):
 	@make debug $(_MAKEFLAGS)

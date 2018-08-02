@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/31 05:02:22 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/07/31 05:03:49 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/08/02 18:23:39 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,12 +85,12 @@ void	process(t_minishell *data, t_env **list)
 	if ((i = get_next_line(0, &line)) <= 0)
 	{
 		if (i == -1 && line == NULL)
-			print_error(_ENOMEM);
+			print_error(_ENOMEM, ERROR_HEADER_MINISH);
 		else
 			exit(EXIT_SUCCESS);
 	}
 	if (!(data->arg = ft_strsplitset(line, " \t")))
-		print_error(_ENOMEM);
+		print_error(_ENOMEM, ERROR_HEADER_MINISH);
 	free(line);
 	if (!data->arg[0])
 		return ;

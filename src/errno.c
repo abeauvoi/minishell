@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/23 02:43:02 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/07/31 05:33:39 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/08/02 18:38:28 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,20 +38,28 @@ void	*ft_set_errno2(int err)
 	g_errors[_ENOPWD - 1] = "PWD not set";
 	g_errors[_ENOOLDPWD - 1] = "OLDPWD not set";
 	g_errors[_ENOTTY - 1] = "Not a terminal, exiting";
+	g_errors[_ENOCDPATH - 1] = "CDPATH not set";
+	g_errors[_ENOENT - 1] = "No such file or directory";
+	g_errors[_ENAMETOOLONG - 1] = "File name too long";
 }
 
-void	print_error(int err)
+void	print_error(int err, char *header)
 {
 	char		buf[256];
 	char		*ptr;
 	const char	*msg;
 
 	msg = g_errors[err - 1];
-	ft_strcpy(buf, "cd: ");
-	ft_strcpy(ptr = buf + 4, msg);
+	if (header)
+	{
+		ft_strcpy(buf, header);
+		ptr = buf + ft_strlen(header);
+	}
+	else
+		ptr = buf;
+	ft_strcpy(ptr, msg);
 	ptr += ft_strlen(msg);
 	*ptr++ = '\n';
-	*ptr = '\0';
 	write(STDERR_FILENO, buf, ptr - buf);
 	g_errno = 0;
 	if (err == _ENOMEM || err == _ENOTTY)

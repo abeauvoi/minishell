@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/11 18:54:46 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/07/25 04:52:04 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/08/01 17:18:00 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ bool				ft_isdigit_nstr(const char *s, size_t n);
 size_t				ft_numstrlen(intmax_t n);
 
 /*
-** Linked lists
+** list
 */
 
 void				ft_lstadd(t_list **alst, t_list *new_elem);
@@ -73,7 +73,7 @@ void				ft_lstprint_base(t_list *list,
 		unsigned char size_of_content, unsigned char radix);
 
 /*
-** Memory mgmt
+** mem
 */
 
 void				*ft_memalloc(size_t size);
@@ -84,6 +84,7 @@ void				*ft_memcpy(void *dst, const void *src, size_t count);
 void				ft_memdel(void **ap);
 void				*ft_memmove(void *dst, const void *src, size_t count);
 void				*ft_memset(void *dst, int c, size_t count);
+void 				*ft_realloc(void *ptr, size_t size);
 
 /*
 ** Output
@@ -102,7 +103,7 @@ void				ft_print_int_tab_base(void *data, unsigned char size_of,
 		size_t len, unsigned char radix);
 
 /*
-** String manipulation
+** str
 */
 
 void				ft_revstr(char *s);
@@ -111,6 +112,7 @@ char				*ft_strchr(const char *s, int c);
 char				*ft_strchrnul(const char *s, int c);
 void				ft_strclr(char *s);
 char				*ft_strcpy(char *dst, const char *src);
+size_t 				ft_strlcpy(char *dst, const char *src, size_t dstsiz);
 int					ft_strcmp(const char *s1, const char *s2);
 void				ft_strdel(char **as);
 char				*ft_strdup(const char *s1);

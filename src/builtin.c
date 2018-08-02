@@ -6,7 +6,7 @@
 /*   By: jolabour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/08 05:13:12 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/07/31 04:50:51 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/08/02 18:21:50 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void		builtin_echo(char **args, size_t total_length)
 	char	*tmp;
 
 	if (!(output = ft_strnew(total_length)))
-		print_error(_ENOMEM);
+		print_error(_ENOMEM, ERROR_HEADER_ECHO);
 	tmp = output;
 	while (*args)
 	{
@@ -68,22 +68,22 @@ void		builtin_setenv(t_env **env, char *name, char *content)
 
 	if (!check_name(name))
 	{
-		print_error(_ENAMEENV);
+		print_error(_ENAMEENV, ERROR_HEADER_SETENV);
 		return ;
 	}
 	len = ft_strlen(name);
 	if (content)
 	{
 		if (!(tmp2 = ft_strjoin(name, "=")))
-			print_error(_ENOMEM);
+			print_error(_ENOMEM, ERROR_HEADER_SETENV);
 		if (!(tmp = ft_strjoin(tmp2, content)))
-			print_error(_ENOMEM);
+			print_error(_ENOMEM, ERROR_HEADER_SETENV);
 		ft_strdel(&tmp2);
 	}
 	else
 	{
 		if (!(tmp = ft_strjoin(name, "=")))
-			print_error(_ENOMEM);
+			print_error(_ENOMEM, ERROR_HEADER_SETENV);
 	}
 	ptr = *env;
 	while (ptr)
@@ -92,7 +92,7 @@ void		builtin_setenv(t_env **env, char *name, char *content)
 		{
 			free(ptr->str);
 			if (!(ptr->str = ft_strdup(tmp)))
-				print_error(_ENOMEM);
+				print_error(_ENOMEM, ERROR_HEADER_SETENV);
 			free(tmp);
 			return ;
 		}

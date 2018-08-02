@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/31 05:07:19 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/07/31 05:07:35 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/08/02 18:25:08 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ void		list_to_tab(t_env *env, t_minishell *data)
 	int		i;
 
 	if (!(data->copy_env = malloc(sizeof(char *) * (len_list(env) + 1))))
-		print_error(_ENOMEM);
+		print_error(_ENOMEM, ERROR_HEADER_MINISH);
 	i = 0;
 	while (env)
 	{
 		if (!(data->copy_env[i] = ft_strdup(env->str)))
-			print_error(_ENOMEM);
+			print_error(_ENOMEM, ERROR_HEADER_MINISH);
 		env = env->next;
 		i++;
 	}
@@ -78,7 +78,7 @@ t_env		*set_list(char **env)
 	while (env[i])
 	{
 		if (!(new = create_node(env[i])))
-			print_error(_ENOMEM);
+			print_error(_ENOMEM, ERROR_HEADER_MINISH);
 		lst_push(&start, new);
 		i++;
 	}

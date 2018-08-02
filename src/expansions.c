@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/31 05:06:28 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/07/31 05:07:11 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/08/02 18:24:50 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,17 @@ static char		*remplace_tilde(char *arg, t_env *env, size_t arglen)
 		if (arglen == 1)
 		{
 			if (!(result = ft_strdup(data)))
-				print_error(_ENOMEM);
+				print_error(_ENOMEM, ERROR_HEADER_MINISH);
 		}
 		else if (data[ft_strlen(data) - 1] == '/')
 		{
 			if (!(result = ft_strjoin(data, arg + 2)))
-				print_error(_ENOMEM);
+				print_error(_ENOMEM, ERROR_HEADER_MINISH);
 		}
 		else
 		{
 			if (!(result = ft_strjoin(data, arg + 1)))
-				print_error(_ENOMEM);
+				print_error(_ENOMEM, ERROR_HEADER_MINISH);
 		}
 		free(arg);
 		return (result);
@@ -45,7 +45,7 @@ static char		*get_user(char *user)
 	char *tmp;
 
 	if (!(tmp = ft_strjoin("/Users/", user + 1)))
-		print_error(_ENOMEM);
+		print_error(_ENOMEM, ERROR_HEADER_MINISH);
 	ft_strdel(&user);
 	return (tmp);
 }
@@ -60,7 +60,7 @@ static int	get_tilde(char **arg, t_env *env)
 	{
 		if ((*arg = remplace_tilde(*arg, env, ft_strlen(*arg))))
 			return (1);
-		print_error(_ENOHOME);
+		print_error(_ENOHOME, ERROR_HEADER_MINISH);
 		return (0);
 	}
 	else
@@ -90,34 +90,34 @@ static int		replace_dollars(char **arg, char *p, t_env *env)
 	if ((data = ft_getenv(env, p + 1, (tmp - p) - 1)) != NULL || p[1] == '$')
 	{
 		if (!(tmp2 = ft_strsub(*arg, 0, (p - *arg))))
-			print_error(_ENOMEM);
+			print_error(_ENOMEM, ERROR_HEADER_MINISH);
 		if (p[1] == '$')
 		{
 			if (!(tmp3 = ft_strjoin(tmp2, data = ft_itoa_base((int)getpid, 10)))
 					|| !data)
-				print_error(_ENOMEM);
+				print_error(_ENOMEM, ERROR_HEADER_MINISH);
 			ft_strdel(&data);
 			ft_strdel(&tmp2);
 			if (!(tmp2 = ft_strdup(tmp + 1)))
-				print_error(_ENOMEM);
+				print_error(_ENOMEM, ERROR_HEADER_MINISH);
 		}
 		else
 		{
 			if (!(tmp3 = ft_strjoin(tmp2, data + 1)))
-				print_error(_ENOMEM);
+				print_error(_ENOMEM, ERROR_HEADER_MINISH);
 			ft_strdel(&tmp2);
 			if (!(tmp2 = ft_strdup(tmp)))
-				print_error(_ENOMEM);
+				print_error(_ENOMEM, ERROR_HEADER_MINISH);
 		}
 		free(*arg);
 		if (!(*arg = ft_strjoin(tmp3, tmp2)))
-			print_error(_ENOMEM);
+			print_error(_ENOMEM, ERROR_HEADER_MINISH);
 		ft_strdel(&tmp3);
 		ft_strdel(&tmp2);
 		return (1);
 	}
 	ft_putstr(p + 1);
-	print_error(_ENOVAR);
+	print_error(_ENOVAR, ERROR_HEADER_MINISH);
 	return (0);
 }
 

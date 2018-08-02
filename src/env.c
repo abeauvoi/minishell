@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/30 21:22:04 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/07/31 07:43:51 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/08/02 18:24:07 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	init_builtin_tab(t_minishell *data)
 {
 	if (!(data->builtin = malloc(sizeof(char *) * 7)))
-		print_error(_ENOMEM);
+		print_error(_ENOMEM, ERROR_HEADER_MINISH);
 	data->builtin[0] = "echo";
 	data->builtin[1] = "cd";
 	data->builtin[2] = "env";
@@ -53,13 +53,13 @@ void	init_env(t_minishell *data, t_env *list)
 	if (path)
 	{
 		if (!(data->bin_dirs = ft_strsplit(path, ':')))
-			print_error(_ENOMEM);
+			print_error(_ENOMEM, ERROR_HEADER_MINISH);
 	}
 	pwd = ft_getenv(list, "PWD=", sizeof("PWD=") - 1);
 	if (pwd)
 	{
 		if (!(data->pwd = ft_strdup(pwd)))
-			print_error(_ENOMEM);
+			print_error(_ENOMEM, ERROR_HEADER_MINISH);
 	}
 	list_to_tab(list, data);
 }
