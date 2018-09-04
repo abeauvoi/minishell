@@ -6,7 +6,7 @@
 #    By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/17 15:44:28 by abeauvoi          #+#    #+#              #
-#    Updated: 2018/08/02 18:01:18 by abeauvoi         ###   ########.fr        #
+#    Updated: 2018/08/14 22:08:00 by abeauvoi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,8 +27,7 @@ VPATH		= $(SRCS_DIR)
 #
 
 SRCS		= main.c env.c list.c check_command.c core.c exec_builtin.c \
-		  builtin.c signals.c expansions.c list2.c builtin_cd.c \
-		  errno.c canonicalize.c canonicalize2.c
+		  builtin.c signals.c expansions.c list2.c builtin_cd.c errno.c
 #
 # Build
 #

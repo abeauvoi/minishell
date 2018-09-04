@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/23 02:43:02 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/08/02 18:38:28 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/08/06 02:18:15 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ void	*ft_set_errno2(int err)
 	g_errors[_ENOPWD - 1] = "PWD not set";
 	g_errors[_ENOOLDPWD - 1] = "OLDPWD not set";
 	g_errors[_ENOTTY - 1] = "Not a terminal, exiting";
-	g_errors[_ENOCDPATH - 1] = "CDPATH not set";
 	g_errors[_ENOENT - 1] = "No such file or directory";
 	g_errors[_ENAMETOOLONG - 1] = "File name too long";
+	g_errors[_EGETCWD -1 ] = "Getcwd failed for unknown reasons";
 }
 
 void	print_error(int err, char *header)

@@ -6,7 +6,7 @@
 /*   By: abeauvoi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/18 00:37:39 by abeauvoi          #+#    #+#             */
-/*   Updated: 2018/08/02 19:10:42 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/09/04 20:41:47 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int		parse_options(char **args, bool *no_symlinks)
 		p = *args;
 		while (*++p)
 		{
-			if (!ft_strchr("LP", *p))
+			if (ft_strchr("LP", *p) != NULL)
 			{
 				ft_putstr("cd: -");
 				ft_putchar(*p);
@@ -47,17 +47,18 @@ static int		parse_options(char **args, bool *no_symlinks)
 	return (i);
 }
 
-static char	*join_pwd_to_arg(char *pwd, char *operand)
+static char	*join_pwd_to_arg(char *operand)
 {
 	char	buf[PATH_MAX];
 	char	*ptr;
 	char	*curpath;
 	size_t	strlen_operand;
 
-	strlen_operand = ft_strlen(operand);
-	ft_strcpy(buf, pwd);
-	ptr = buf + ft_strlen(pwd);
+	if (!(ptr = getcwd(buf, PATH_MAX)))
+		return (ft_set_errno2(_EGETCWD));
+	ptr += ft_strlen(buf);
 	*ptr++ = '/';
+	strlen_operand = ft_strlen(operand);
 	if (ptr + strlen_operand > buf + PATH_MAX)
 		return (ft_set_errno2(_ENAMETOOLONG));
 	ft_strcpy(ptr, operand);
@@ -79,26 +80,28 @@ static char	*parse_cdpath(char *arg, bool *print_pwd, char *cdpath)
 	size_t 			len_pathname;
 	struct stat 	stats;
 	
-	while (*cdpath && (next_component = ft_strchr(cdpath, ':')))
+	while (*cdpath)
 	{
+		next_component = ft_strchrnul(cdpath, ':');
 		len_pathname = next_component - cdpath;
-		ptr = buf;
 		if (len_pathname > 0)
-			ptr = ft_strncpy(ptr, cdpath, len_pathname) + len_pathname;
+			ptr = ft_strncpy(buf, cdpath, len_pathname) + len_pathname;
 		else
+		{
+			ptr = buf;
 			*ptr++ = '.';
+		}
 		*ptr++ = '/';
 		if (ptr + ft_strlen(arg) > buf + PATH_MAX)
 			return (ft_set_errno2(_ENAMETOOLONG));
 		ft_strcpy(ptr, arg);
-		ft_printf("[cdpath/buf:%s]\n", buf);
 		if (access(buf, X_OK) == 0 && stat(buf, &stats) == 0
 				&& S_ISDIR(stats.st_mode))
 		{
 			*print_pwd = true;
 			return (ft_strdup(buf));
 		}
-		cdpath = next_component + 1;
+		cdpath = next_component + !!*next_component;
 	}
 	return (NULL);
 }
@@ -127,12 +130,10 @@ static char	*set_curpath(t_env *env, char *arg, bool *print_pwd,
 		*curpath_is_mallocd = true;
 		return (new_path);
 	}
-	else if (!cdpath)
-		return (ft_set_errno2(_ENOCDPATH));
 	else
 	{
 		*curpath_is_mallocd = true;
-		return (join_pwd_to_arg(ft_getenv(env, "PWD=", 4), arg));
+		return (join_pwd_to_arg(arg));
 	}
 }
 
@@ -143,7 +144,6 @@ int			builtin_cd(t_env **env, char **argv)
 	bool	print_pwd;
 	int		ret;
 	char	*curpath;
-	char 	*tmp;
 	char	cwd[PATH_MAX];
 
 	if ((ret = parse_options(++argv, &no_symlinks)) != -1)
@@ -154,13 +154,6 @@ int			builtin_cd(t_env **env, char **argv)
 		curpath = set_curpath(*env, *argv, &print_pwd, &curpath_is_mallocd);
 		if (!curpath)
 			return (-1);
-		else if (no_symlinks)
-		{
-			tmp = curpath;
-			curpath = ft_realpath(curpath, NULL);
-			if (curpath_is_mallocd)
-				free(tmp);
-		}
 		ret = chdir(curpath); 
 		if (curpath_is_mallocd)
 			free(curpath);

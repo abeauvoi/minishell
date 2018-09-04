@@ -6,7 +6,7 @@
 /*   By: jolabour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/23 03:27:39 by jolabour          #+#    #+#             */
-/*   Updated: 2018/08/02 18:36:57 by abeauvoi         ###   ########.fr       */
+/*   Updated: 2018/08/06 02:16:56 by abeauvoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ typedef enum		e_errno_val
 	_ENOPWD,
 	_ENOOLDPWD,
 	_ENOTTY,
-	_ENOCDPATH,
+	_EGETCWD,
 	_ERRNO_VALUES
 }					t_errno;
 
